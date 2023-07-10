@@ -6,6 +6,7 @@ import { ProfileModule } from '../profile-card/profile.module';
 import { DialogDetailsContainerComponent } from '../news-details/dialog-details-container.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
+import { GenericModalComponent } from '../shared-modal/generic-modal.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
     component: SearchComponent,
     children: [
       { path: 'news-details/:id', component: DialogDetailsContainerComponent },
+      {
+        path: 'upload',
+        component: GenericModalComponent,
+      },
     ],
   },
 ];
