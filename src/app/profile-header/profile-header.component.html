@@ -1,0 +1,21 @@
+<div *ngIf="(boolUser|async) === 1" style="display: grid;">
+  <label class="hoverable2 fb-image-lg thumbnail" for="fileInput1">
+    <img *ngIf="back_url" align="left" class="fb-image-lg" [src]="back_url" alt="asel">
+    <div class="hover-text2">Choose file</div>
+    <div class="background"></div>
+  </label>
+  <br/>
+  <input id="fileInput2" type='file' (change)="onSelectFile($event, 0)">
+  <label class="hoverable1 fb-image-lg thumbnail" for="fileInput2">
+    <img *ngIf="prof_url" align="left" class="fb-image-profile thumbnail" alt="asel"
+         [src]="prof_url">
+    <div class="hover-text1">Choose file</div>
+    <div class="background"></div>
+  </label> 
+  <br/>
+  <input id="fileInput1" type='file' (change)="onSelectFile($event, 1)">
+</div>
+<div *ngIf="(boolUser|async) !== 1" style="display: grid;">
+  <img *ngIf="back_url" align="left" class="fb-image-lg" [src]="back_url" alt="asel"/>
+  <img *ngIf="prof_url" align="left" class="sfb-image-profile thumbnail" [src]="prof_url" alt="asel"/>
+</div>

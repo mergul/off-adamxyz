@@ -1,0 +1,9 @@
+// img {
+//     vertical-align: middle;
+//     margin-top: inherit;
+// }
+img {
+  // height: calc(300 * (100vw / 1503));
+  width: 100%;
+  object-fit: cover;
+}

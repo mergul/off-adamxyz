@@ -1,0 +1,22 @@
+table.mat-table {
+    width: 100%;
+}
+th {
+    text-align: center !important;
+}
+td.mat-header-cell, td.mat-cell {
+    width: 16%;
+    text-align: center !important;
+}
+td.mat-column-date {
+    width: 20%;
+    padding-right: 0 !important;
+}
+th.mat-header-cell:first-of-type {
+    padding-left: 10px !important;
+    text-align: center !important;
+}
+td.mat-column-pageviews {
+    padding-left: 0 !important;
+    text-align: center !important;
+}

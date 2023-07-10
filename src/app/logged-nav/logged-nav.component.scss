@@ -1,0 +1,74 @@
+span.mat-button-wrapper {
+  ::before,
+  ::after {
+    height: 55px;
+  }
+}
+.mat-icon-button, .mat-icon{
+  width: 44px;
+  height: 44px;
+  line-height: 66px !important;
+  font-size: inherit;
+  border: none;
+  cursor: pointer;
+}
+  span.notification {
+    padding: 10px;
+    font-size: large;
+  }
+div.right-side{
+  display: flex;
+  justify-content: center;
+  height: max-content; 
+}
+.fes{
+  max-width: 150px;
+  border-radius: 25%;
+  min-width: 55px !important;
+  user-select: none;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  color: inherit;
+  background: transparent;
+  text-decoration: none;
+  vertical-align: baseline;
+  text-align: center;
+  margin: 0;
+  box-sizing: border-box;
+  position: relative;
+  align-items: center;
+  line-height: 44px;
+}
+.dropdown {
+  background-color: rgb(199 115 236 / 80%);
+  display: none;
+  margin-top: 66px;
+  position: absolute;
+  text-align: center;
+  left: 0;  top: 0;
+  min-height: -webkit-fill-available;
+  z-index: 6;
+  width: 100%;
+  button {
+    color: rgb(250, 250, 250);
+    padding: 40px;
+    &:hover {
+      color: grayscale($color: #000000);
+      background-color: rgb(201 120 221 / 34%);
+    }
+  }
+  &.show {
+    display: grid;
+  }
+}
+@media only screen and (max-width: 599px) {
+  .right-side{
+    display: none !important;
+  }
+}
+input[type="checkbox"]:checked + .dropdown{
+  display: grid;
+  }

@@ -1,0 +1,55 @@
+<div *ngIf="logged" class="right-side" [ngSwitch]="checkMedia">
+  <button id="searchx" mat-icon-button (click)="btnClick('/search')" class="mat-icon-button"
+    matTooltip="search new contents" aria-label="Center Align">
+    <mat-icon>search</mat-icon>
+  </button>
+  <button id="uploadx" *ngSwitchCase="false" matTooltip="add new contents" class="mat-icon-button"
+    aria-label="Right Align" (click)="btnClick('/upload')">
+    <mat-icon>add_shopping_cart</mat-icon>
+  </button>
+  <button id="uploadxy" *ngSwitchCase="true" mat-icon-button (click)="btnClick('/upload')" class="mat-icon-button"
+    matTooltip="add new contents" aria-label="Center Align">
+    <mat-icon>cloud_upload</mat-icon>
+  </button>
+  <button id="settings" *ngIf="!(role&&(role.includes('ROLE_ADMIN')||role.includes('ROLE_MODERATOR')))" mat-icon-button
+    (click)="btnClick('/admin')" class="mat-icon-button" matTooltip="manage reports" aria-label="Center Align">
+    <mat-icon>settings</mat-icon>
+  </button>
+  <mat-menu #appMenu="matMenu" xPosition="before">
+    <button mat-menu-item (click)="logout()">Logout</button>
+    <button mat-menu-item (click)="btnClick('/user/edit')">Settings</button>
+    <button mat-menu-item (click)="btnClick('/user')">Account</button>
+    <button mat-menu-item>Help</button>
+  </mat-menu>
+  <button mat-icon-button [matMenuTriggerFor]="appMenu" matTooltip="Logged User" class="fes" aria-label="Center Align">
+    <img *ngIf="image" [src]="image" width="55px" height="55px" style="border-radius:50%;line-height: 66px;" alt="Asel">
+    <span *ngIf="service.loggedUser"
+      class="notification">{{service.loggedUser.name?service.loggedUser.name:service.loggedUser.email}}</span>
+  </button>
+</div>
+<div *ngIf="logged" class="dropdown" id="dropdown" [class.show]="isOpen">
+  <button id="search" mat-icon-button (click)="btnClick('/search')" class="mat-icon-button"
+    matTooltip="search new contents" aria-label="Center Align">
+    <mat-icon>search</mat-icon>Search
+  </button>
+  <button id="upload" mat-icon-button (click)="btnClick('/upload')" class="mat-icon-button"
+    matTooltip="add new contents" aria-label="Center Align">
+    <mat-icon>cloud_upload</mat-icon>Upload
+  </button>
+  <button id="settings" *ngIf="!(role&&(role.includes('ROLE_ADMIN')||role.includes('ROLE_MODERATOR')))" mat-icon-button
+    (click)="btnClick('/admin')" class="mat-icon-button" matTooltip="manage reports" aria-label="Center Align">
+    <mat-icon>settings</mat-icon>
+  </button>
+  <mat-menu #appMenu="matMenu" xPosition="before">
+    <button mat-menu-item (click)="logout()">Logout</button>
+    <button mat-menu-item (click)="btnClick('/user/edit')">Settings</button>
+    <button mat-menu-item (click)="btnClick('/user')">Account</button>
+    <button mat-menu-item>Help</button>
+  </mat-menu>
+  <button mat-icon-button [matMenuTriggerFor]="appMenu" matTooltip="Info about the action" class="fes"
+    aria-label="Center Align">
+    <img *ngIf="image" [src]="image" width="55px" height="55px" style="border-radius:50%;line-height: 66px;" alt="Asel">
+    <span *ngIf="service.loggedUser"
+      class="notification">{{service.loggedUser.name?service.loggedUser.name:service.loggedUser.email}}</span>
+  </button>
+</div>

@@ -1,0 +1,31 @@
+@media only screen and (min-width: 1080px) {
+    .container{
+      width: 600px
+    }
+  }
+@media only screen and (max-width: 1079px) {
+    .container{
+      max-width: 300px
+    }
+}
+.containerx {
+    display: table;
+    margin: 0 auto;
+    padding: 20px 50px;
+}
+.form-control {
+    display: inline-block;
+    width: 300px;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #ffecfe;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }

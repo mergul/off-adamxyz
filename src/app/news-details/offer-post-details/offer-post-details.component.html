@@ -1,0 +1,14 @@
+<div class="offer-details" [style.maxWidth]="this._width">
+    <app-carousel [myMediaReviews]="this._offer.mediaReviews"></app-carousel>
+    <article>
+        <h1>{{this._offer.topic}}</h1>
+        <p>Price: {{this._offer.price}}</p>
+        <p [innerHTML]="this._offer.summary | sanitizeHtml"></p>
+
+    </article>
+    <footer id="modal-footer" style="display: flex;justify-content: space-between;">
+        <button id="closes" type="button" class="butto ripple button-outline" (click)="closeModal()">Close</button>
+        <button id="closes" type="button" class="butto ripple button-outline"
+            (click)="acceptOffer()">acceptOffer</button>
+    </footer>
+</div>

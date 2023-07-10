@@ -1,0 +1,23 @@
+<div style="margin-left: 35%">
+  <ng-container *ngIf="actionCodeChecked" [ngSwitch]="mode">
+    <!-- Reset Password -->
+    <ng-container *ngSwitchCase="'resetPassword'">
+      <input [(ngModel)]="oldPassword" type="text" id="oldPassword"
+             name="oldPassword" placeholder="Old Password"> <br>
+      <input [(ngModel)]="newPassword" type="text" id="newPassword"
+             name="newPassword" placeholder="New Password"> <br>
+      <input [(ngModel)]="confirmPassword" type="text"
+             id="confirmPassword" name="confirmPassword" placeholder="Confirm
+    Password">
+      <button (click)="handleResetPassword()">Confirm</button>
+    </ng-container>
+    <!-- Recover Email -->
+    <ng-container *ngSwitchCase="'recoverEmail'">
+    </ng-container>
+
+    <!-- Verify Email -->
+    <ng-container *ngSwitchCase="'verifyEmail'">
+      <h6>Your Email Successfully Verified</h6>
+    </ng-container>
+  </ng-container>
+</div>

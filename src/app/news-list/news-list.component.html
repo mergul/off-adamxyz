@@ -1,0 +1,7 @@
+<div class="news">
+    <ul class="items">
+        <li #newsSum *ngFor="let news of newsList$ | async;trackBy: byId" class="news-list shadow">
+            <app-post [news]="news"></app-post>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,35 @@
+.fb-image-lg{
+  z-index: 0;
+  height: 125px;
+  float: left;
+}
+@media only screen and (max-width: 1279px) {
+  .fb-image-lg{
+    width: 250px;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .fb-image-lg{
+    width: 310px;
+  }
+}
+.fb-image-profile
+{
+  margin: -60px 10px 0px 10px;
+  z-index: 9;
+  border-radius: 50%;
+  float: left;
+  width: 100px;
+}
+
+.mat-icon-button, .mat-icon{
+  width: 46px;
+  height: 46px;
+  line-height: 40px !important;
+  font-size: xx-large;
+}
+.container{
+  max-width: 100%;
+  max-height: 500px; 
+  float: right
+}

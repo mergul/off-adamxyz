@@ -1,0 +1,37 @@
+video{
+  width: 100%;
+}
+.p-1{
+  display: flex;
+}
+mat-form-field.my_options{
+  max-width: 33%
+}
+mat-form-field.speech-result-width{
+  width: auto;
+  min-width: 300px;
+  text-align: center;
+}
+ul, li {list-style-type: none;}
+
+li {text-indent: -2em;}
+.chat {
+  min-width: 400px;
+}
+#textbox {
+  min-width: 380px;
+}
+#micro {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  border-radius: .25rem;
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 17px;
+  height: auto;
+  width: 159px;
+  cursor: pointer;
+}

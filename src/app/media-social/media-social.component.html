@@ -1,0 +1,17 @@
+<div *ngIf="social|async" style="display: flex;justify-content: space-around;">
+  <div mat-menu-item class="mat-menu-item">
+    <div (click)="shareOnFacebook()"><img src="/assets/face.png" width="50" height="50"></div>
+  </div>
+  <div mat-menu-item class="mat-menu-item">
+    <div (click)="shareOnTwitter()"><img src="/assets/twitter.png" width="50" height="50"></div>
+  </div>
+  <div mat-menu-item class="mat-menu-item">
+    <div (click)="shareOnLinkedIn()"><img src="/assets/inshare.jpeg" width="50" height="50"></div>
+  </div>
+  <div mat-menu-item class="mat-menu-item">
+    <div (click)="shareOnReddit()"><img src="/assets/redshare.png" width="50" height="50"></div>
+  </div>
+  <div mat-menu-item class="mat-menu-item">
+    <div (click)="shareOnPinterest()"><img src="/assets/pinshare.png" width="50" height="50"></div>
+  </div>
+</div>

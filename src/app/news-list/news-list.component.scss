@@ -1,0 +1,27 @@
+.news {
+  text-align: left;
+  display: flex;
+}
+.news ul.items {
+  margin: 0 auto;
+  padding: 0;
+}
+.news-list {
+  display: flex;
+  clear: both;
+  margin: 10px 0 20px;
+  background-color: white;
+  transition: all 0.2s ease-in-out;
+  opacity: 0.8;
+}
+.shadow {
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2),
+    0px 0px 10px 0px rgba(0, 0, 0, 0.14), 0px 0px 14px 0px rgba(0, 0, 0, 0.12);
+}
+.news-list:hover {
+  transform: translateY(-1px);
+  opacity: 1;
+}
+::ng-deep .cdk-overlay-pane {
+  overflow-y: auto;
+}

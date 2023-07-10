@@ -1,0 +1,39 @@
+<form [formGroup]="searchForm" style="overflow: hidden">
+    <table style="width: 100%;line-height: 1.7 !important;">
+        <tbody>
+            <tr>
+                <td class="fh">
+                    <mat-form-field style="width: 100%;line-height: 1.7 !important;" class="mearch">
+                        <label style="vertical-align: sub;">
+                        <input matInput type="search" aria-label="Search" placeholder="Search" class="form-control"[formControl]="searchField" #myInput>
+                        </label>
+                        <!-- <mat-icon matSuffix style="font-size: 1.2em">search</mat-icon> -->
+                    </mat-form-field>
+                </td>
+                <td class="gh">
+                  <div id="box">
+                      <select class="mybox" (change)="onClick($event.target)" #mySelect>
+                          <option value="1">{{links[0]}}</option>
+                          <option value="2">{{links[1]}}</option>
+                      </select>
+                  </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+<nav mat-tab-nav-bar>
+    <a mat-tab-link *ngFor="let link of links" (click)="onClick(link)" [active]="_activeLink == link"
+        style="min-width: 50%;"> {{link}} </a>
+</nav>
+<div class="news" style="margin-top: 0px" appScroll (onScroll)="track($event)">
+    <ul class="items" [ngSwitch]="searchType===0" [style.width]="wdth+'px'" [style.minHeight]="hght+'px'">
+       <li style="display: block;"> <app-news-list *ngSwitchCase="false" [newsList]="newsResults" [percentage]="percentage" [activeLink]="miLink"
+            [currLink]="miLink"></app-news-list>
+        <app-profile-list *ngSwitchCase="true" [users]="usersResults" [booled]="true"></app-profile-list> 
+        <div (click)="moveTop()" class="scroll-to-top" *ngIf="percentage>75" >
+         </div>
+    </li>
+    </ul>
+</div>
+<router-outlet></router-outlet>

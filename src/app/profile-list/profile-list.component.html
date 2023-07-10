@@ -1,0 +1,5 @@
+<div *ngIf="booled">
+  <div *ngFor="let user of _users|async">
+    <app-profile-card [user]="user" style="display: flex"></app-profile-card>
+  </div>
+</div> 

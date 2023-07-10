@@ -1,0 +1,67 @@
+<div id="modal-content-wrapper">
+    <header id="modal-header" [ngStyle]="wideStyle">
+        <button type="button" class="close" (click)="onClose('')" aria-label="Close">
+            <span aria-hidden="true"
+                style="font-weight: bolder; font-size: xx-large;line-height: 30px !important;">&times;</span>
+        </button>
+    </header>
+    <section id="modal-body" [ngStyle]="wideStyle">
+        <h1 class="header">Login</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <form [formGroup]="loginForm">
+                        <div class="form-group">
+                            <label>Email address
+                                <input type="email" formControlName="email" placeholder="example@example.com"
+                                    class="form-control" [style.width.px]="data.header$ - 30">
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>Password
+                                <input type="password" class="form-control" placeholder="Password"
+                                    formControlName="password" [style.width.px]="data.header$ - 30">
+                            </label>
+                            <label class="error">{{errorMessage}}</label>
+                            <button *ngIf="!resetPassword && (isValidMailFormat|async)&&errorMessage.length>0"
+                                class="btn btn-danger" (click)="sendResetEmail()">Reset Password</button>
+                            <p *ngIf="resetPassword" class="text-success">Check your email to reset password!</p>
+                        </div>
+                        <button id="kaydet1" [disabled]="loginForm.pristine" type="submit"
+                            (click)="tryLogin(loginForm.value)" class="butto ripple button-outline"
+                            [style.width.px]="data.header$">Login</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-6">
+                    <button [style.width.px]="data.header$" id="kaydet2" type="button"
+                        class="butto ripple button-outline" (click)="tryFacebookLogin()">Login with Facebook
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-6">
+                    <button id="kaydet3" [style.width.px]="data.header$" type="button"
+                        class="butto ripple button-outline" (click)="triedGoogleLogin()">Login with Google</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-6">
+                    <button id="kaydet4" [style.width.px]="data.header$" type="button"
+                        class="butto ripple button-outline" (click)="tryTwitterLogin()">Login with Twitter</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-6">
+                    <p>No account yet? <a href="/register"
+                            style="color: #007bff;text-decoration: none;background-color: transparent;">Create an
+                            account</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer id="modal-footer" [ngStyle]="wideStyle">
+        <button id="closes" type="button" class="butto ripple button-outline" (click)="onClose('home')">Close</button>
+    </footer>
+</div>

@@ -1,0 +1,27 @@
+.fes{
+    user-select: none;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    display: inline-block;
+    color: inherit;
+    background: transparent;
+    text-decoration: none;
+    vertical-align: baseline;
+    text-align: center;
+    margin: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+.scroll-to-top{
+  position: fixed;
+  background: url('../../assets/top-arrow.svg') no-repeat center 50%;
+  background-color: hsla(5,76%,62%,.8);
+  bottom: 0;
+  width: 3rem;
+  height: 3rem;
+  right: 200px;
+  cursor: pointer;
+  border-radius: 50%;
+}

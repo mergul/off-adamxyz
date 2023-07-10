@@ -1,0 +1,86 @@
+<div id="modal-content-wrapper" role="dialog" aria-modal="true" aria-labelledby="modal-header" class="hidden">
+    <header id="modal-header" [ngStyle]="wideStyle">
+        <button type="button" class="close" (click)="onClose()" aria-label="Close">
+            <span aria-hidden="true" style="font-weight: bolder; font-size: xx-large;line-height: 30px !important;">&times;</span>
+        </button>
+    </header>
+    <section id="modal-body" [ngStyle]="wideStyle">
+        <div style="display: flex; justify-content: space-evenly; width: 100%; margin-top: 5px;">
+            <mat-form-field class="my-options">
+                <mat-label>Select your language</mat-label>
+                <mat-select [(value)]="currentLanguage" aria-label="select one">
+                    <mat-option *ngFor="let language of languages" [value]="language" (click)="onSelectLanguage(language)" role="option">
+                        {{language}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <form [formGroup]="documentGrp"  ngNativeValidate
+            style="margin-top: 0px;">
+            <div class="box box-solid box-primary">
+                <div style="padding-top: 0px;display: flex;justify-content: center;">
+                    <button #startTopButton type="button" id="micro1" [disabled]="startTopButtonDisabled"
+                    class="butto ripple button-outline" (click)="startCamera($event)">Start Microphone</button>
+                </div>
+                <mat-form-field class="example-full-width">
+                    <mat-label class="padded">Topic: Leave any comment</mat-label>
+                    <textarea matInput #topBox formControlName="news_topic" id="news_topic" class="md-textarea news_topic form-control"
+                        rows="4" placeholder="Enter document topics"
+                        [value]="isTopicActivated?(speechMessages|async)?.transcript:miTopText">
+                                            </textarea>
+                    <mat-hint *ngIf="!isTopicValid"> **At least 4 chars Required</mat-hint>
+                </mat-form-field>
+            </div>
+
+            <div class="box box-solid box-primary">
+                <div style="padding-top: 0px;display: flex;justify-content: center;">
+                    <button #startDescButton type="button" id="micro2" [disabled]="startDescButtonDisabled"
+                    class="butto ripple button-outline" (click)="startCamera($event)">Start Microphone</button>
+                </div>
+                <mat-form-field class="example-full-width">
+                    <mat-label class="padded">Description: Leave any comment</mat-label>
+                    <textarea matInput #textBox formControlName="news_description" id="news_description"
+                        class="md-textarea news_description form-control" rows="7" placeholder="Enter document Category"
+                        [value]="isDescActivated?(speechMessages|async)?.transcript:miDescText">
+                                            </textarea>
+                    <mat-hint *ngIf="!isDescValid">**At least 4 chars Required</mat-hint>
+                </mat-form-field>
+            </div>
+
+            <div class="box box-solid box-primary" style="width: 98%; padding-left: .75rem;">
+                <div class="box-body" formArrayName="items">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div *ngFor="let item of items.controls; let i = index;">
+                                <div [formGroupName]="i">
+                                    <div class="custom-file form-group">
+                                        <mat-form-field class="columns">
+                                            <mat-label *ngIf="totalFiles.length > 0; else newFile">{{totalFiles[0].name}}</mat-label>
+                                            <ng-template #newFile>
+                                                <mat-label style="font-size: 19px !important; top: 1.5em !important">Choose file</mat-label>
+                                            </ng-template>
+                                            <input matInput disabled>
+                                            <button id="mifiles" type="button" class="mincludes" (click)="fileInput.click()" aria-label="Center Align">
+                                                <mat-icon>attach_file</mat-icon>
+                                            </button>
+                                            <input hidden (change)="fileSelectionEvents($event,i)" #fileInput type="file" class="custom-file-input" id="file-input" multiple>
+                                        </mat-form-field>
+                                    </div>
+                                    <app-files-thumbnails [thumbs]="thumbnails|async" style="display: table">
+                                    </app-files-thumbnails>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer" style="align-content: center; text-align: center; padding: 20px">
+                    <button id="micro3" [disabled]="!(this.isTopicValid && this.isDescValid)" type="submit" (click)="OnSubmit(documentGrp.value)" class="butto ripple button-outline"
+                        style="width: 50%">Yayımla</button>
+                </div>
+            </div>
+        </form>
+    </section>
+    <footer id="modal-footer" [ngStyle]="wideStyle">
+        <button id="closes" type="button" class="butto ripple button-outline" (click)="onClose()">Close</button>
+    </footer>
+</div>

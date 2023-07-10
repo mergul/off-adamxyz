@@ -1,0 +1,32 @@
+<div class="sliderrr-wrapper" [ngStyle]="sliderWrapperStyle">
+    <div class="bx-wrapper">
+        <div class="carousel-wrapper" [ngStyle]="carouselWrapperStyle">
+            <ul class="carousel-inner" #carousel [ngStyle]="carouselWrapStyle">
+                <li class="media-image" *ngFor="let review of this._mediaReviews" [ngSwitch]="review.has_medium">
+                    <app-media-source *ngSwitchCase="false" [review]="getReview(review)">
+                    </app-media-source>
+                    <app-files-list *ngSwitchCase="true" [thumbName]="'medium-' + review.file_name">
+                    </app-files-list>
+                </li>
+            </ul>
+        </div>
+        <div class="bx-controls bx-has-controls-direction">
+            <div class="bx-controls-direction">
+                <a class="bx-prev" (click)="prev()">Prev</a><a class="bx-next" (click)="next()">Next</a>
+            </div>
+        </div>
+    </div>
+    <div id="sliderrr-pager">
+        <ul class="sliderrr-page" #slider [ngStyle]="carouselPagerStyle">
+            <li *ngFor="let thumbFile of this._mediaReviews; index as i" class="{{i===0?'active':''}}">
+                <a (click)="currentDiv(i)" style="margin-left: 5px;">
+                    <app-files-list [thumbName]="'thumb-kapak-' + thumbFile.file_name"></app-files-list>
+                </a>
+            </li>
+        </ul>
+        <div style="position: relative">
+            <a class="slider-bx-prev" (click)="sliderPrev()">Prev</a><a class="slider-bx-next"
+                (click)="sliderNext()">Next</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div id="ContentPlaceHolder1_mansetDiv" class="sliderrr-wrapper">
+    <div class="bx-wrapper">
+        <div #carouselWrapper class="carousel-wrapper" [ngStyle]="carouselWrapperStyle">
+            <div #listContainer class="mx-wrapper">
+            <ul class="carousel-inner" #carousel [ngStyle]="carouselWrapStyle">
+                            <li #newsSum *ngFor="let news of newsService.newsStreamList$ | async" class="media-image">
+                                  <app-post [news]="news" style="width: 100%;"></app-post>
+                            </li>
+                            <!-- newsService.tagsStreamList$ : newsService.peopleStreamList$" -->
+            </ul>
+            </div>
+        </div>
+        <div class="bx-controls bx-has-controls-direction">
+            <div class="bx-controls-direction">
+                <a class="bx-prev"  (click)="prev()">Prev</a><a class="bx-next"
+                     (click)="next()">Next</a>
+            </div>
+        </div>
+    </div>
+</div>

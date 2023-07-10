@@ -1,0 +1,25 @@
+<mat-card class="example-card" (click)="offerDetails()" style="font-size: 11px; line-height: 1;">
+    <mat-card-header></mat-card-header>
+    <mat-card-content id="content" [style.display]="this.winRef.nativeWindow.innerWidth > 800?'flex':'block'">
+        <app-files-list [thumbName]="'thumb-kapak-' + (offer.thumb ? offer.thumb : 'bae.jpeg')"
+            style="margin-top: 0px;"></app-files-list>
+        <div class="malink" style="padding-left: 10px; width: auto;">
+            <h3>offered price is: {{offer.price}}</h3>
+            <h5 class="mahead">
+                <span class='date'>{{offer.startDate | date:'medium'}}</span>
+                <br>
+                <!-- <span class="text" *ngIf="offer.topic.charAt(0)!=='#'">{{offer.topic.split('#')[0]}}</span> -->
+                <span class='text'>Demand Id: {{offer.newsOwnerId}}</span>
+                <span class="text" *ngFor="let tag of offer.tags; let i = index">
+                    <a class="tag" (click)="onTagClick(tag);$event.stopPropagation();$event.preventDefault()"
+                        style="font-weight: 600;color: #641b7b"> {{tag}} </a>
+                    <!-- {{getIt(i)}} -->
+                </span>
+
+            </h5>
+            <h4>offered by @{{offer.ownerId}}</h4>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+    </mat-card-actions>
+</mat-card>

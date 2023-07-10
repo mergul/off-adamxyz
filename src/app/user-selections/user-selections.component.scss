@@ -1,0 +1,24 @@
+mat-list-option[aria-selected="true"] {
+  background: #b005f71f;
+}
+.submit{
+  background-color: transparent;
+  border-color: rgb(210, 30, 30);;
+  color: rgb(210, 30, 30);
+}
+.submit:hover {
+  background-color: rgb(210, 30, 30);;
+  border-color: rgb(210, 30, 30);;
+  color: #fff;
+}
+@media only screen and (min-width: 1080px) {
+  .container{
+    padding-top: 14px;
+    width: 600px
+  }
+}
+@media only screen and (max-width: 1079px) {
+  .container{
+    max-width: 300px
+  }
+}

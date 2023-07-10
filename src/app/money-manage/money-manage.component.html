@@ -1,0 +1,15 @@
+<div class="container" style="display: flex">
+<div class="containerx">
+    <form [formGroup]="searchForm" style="width: 300px">
+            <input type="search"
+                   class="form-control" autofocus="true"
+                   placeholder="TL Miktarı Girin"
+                   [formControl]="searchField">
+        <button type="submit" (click)="partitionMoney(searchField.value)" class="butto ripple button-outline" style="margin: 0; width: 300px;">Parayı Dağıt
+        </button>
+    </form>
+    <div style="margin-top: 30px">
+        <button class="butto ripple button-outline" (click)="changeChild()" style="margin: 0; width: 300px;">Para Çekim Talepleri</button>
+    </div>
+</div>
+</div>

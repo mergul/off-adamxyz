@@ -1,0 +1,45 @@
+<div [hidden]="!booled" class="example-container mat-elevation-z8"
+  style="flex-direction: column; width: 100%; margin-top: 18px;">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="pageviews">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Page Views </th>
+      <td mat-cell *matCellDef="let row"> {{row.pageviews}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="payment">
+      <th mat-header-cell *matHeaderCellDef> Payment </th>
+      <td mat-cell *matCellDef="let row"> {{row.payment.toFixed(2)}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalViews">
+      <th mat-header-cell *matHeaderCellDef> Total Views </th>
+      <td mat-cell *matCellDef="let row"> {{row.totalViews}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="payedViews">
+      <th mat-header-cell *matHeaderCellDef> Payed Views </th>
+      <td mat-cell *matCellDef="let row"> {{row.payedViews}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalBalance">
+      <th mat-header-cell *matHeaderCellDef> Total Balance </th>
+      <td mat-cell *matCellDef="let row"> {{row.totalBalance.toFixed(2)}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let row"> {{row.date | date:'medium'}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+<div style="margin-top: 50px; display: flex; justify-content: center;" [matTooltipPosition]="'above'" matTooltip="Geçerli bir IBAN giriniz! veya kazancınız çok az!" [matTooltipDisabled]="loggedUser?.iban!=''&&balance > 10000.0">
+  <button type="submit" [disabled]="loggedUser?.iban==''||balance < 10000.0" (click)="checkOut()" class="butto ripple button-outline">
+    Parayı IBAN ile Aktarın!
+  </button>
+  <!-- <span>{{balance}}</span><br> -->
+</div>

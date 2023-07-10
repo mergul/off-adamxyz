@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div style="display: flex; padding-bottom: 20px">
+      <a [routerLink]="[getUrl()]"
+        [state]="{userID: user.id, loggedID: this.userService.loggedUser!=null?this.userService.loggedUser.id:''}"
+        style="display: grid; background-color: #F0F0F0; cursor: grab">
+        <img *ngIf="back_url" align="left" class="fb-image-lg" [src]="domSanitizer.bypassSecurityTrustUrl(back_url)"
+          [ngStyle]="listStyle" />
+        <img *ngIf="prof_url" align="left" class="fb-image-profile thumbnail"
+          [src]="domSanitizer.bypassSecurityTrustUrl(prof_url)" />
+      </a>
+      <div [ngStyle]="listStyle" style="display: inline-flex; max-width: 308px; margin-left: 0px">
+        <div [ngStyle]="listStyle"
+          style="max-width: 308px; padding: 20px; background-color: #F0F0F0; margin-top: 0px; margin-right: 0px; max-height: 560px">
+          @{{_user.email}}<br><br>
+
+          <div *ngIf="userService.loggedUser!=null && this.user.id !== userService.loggedUser.id"
+            style="text-align: center; padding-top: 20px">
+            <button #followButton class="butto ripple button-outline" (click)="manageFollow()">{{!folli?'Takip
+              Et':'Takibi Kes'}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div *ngFor="let url of thumbs; let i = index;" class="preview">
+  <img *ngIf="url" [src]="sanitizer.bypassSecurityTrustUrl(url)" class="" width="174" height="109">
+  <div *ngIf="url" style="width: 174px; text-align: center;background-color: ghostwhite;">
+    <button mat-icon-button (click)="removeItem(i)" class="btn btn-sm btn-danger">
+      <img src="../assets/xicon.png" width="30px">
+    </button>
+  </div>
+</div>

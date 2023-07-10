@@ -1,0 +1,23 @@
+{
+  "/api/*": {
+    "target": "http://localhost:8090",
+    "secure": false
+  },
+  "/sse/*": {
+    "target": "http://localhost:8091",
+    "secure": false
+  },
+  "/reported/*": {
+    "target": "http://localhost:8092",
+    "secure": false
+  },
+  "/balance/*": {
+    "target": "http://localhost:8093",
+    "secure": false
+  },
+  "/ws/*": {
+    "target": "https://busra.nur:65080",
+    "secure": false,
+    "ws": true
+  }
+}

@@ -1,0 +1,109 @@
+.news{
+  margin-bottom: 1px;
+  text-align: left;
+  display: flex;
+}
+
+.news ul.items{ 
+  display: table;
+  margin: 0 auto;
+  padding: 0;
+}
+ 
+::ng-deep .mat-tab-label,::ng-deep .mat-tab-link {
+  color: #030303 !important;
+  opacity: 0.9 !important;
+  font-family: auto;
+  padding: 0 12px !important;
+}
+::ng-deep .mat-ink-bar {
+  background: purple !important;
+  height: 5px !important;
+}
+
+.mat-tab-label-active{
+  background: white;
+}
+.mat-tab-nav-bar{
+  width: 100%;
+  display: table;
+  margin: 0 auto;
+  text-align: -webkit-center;
+  background-color: #f3f3f3;
+}
+.form-control {
+  display: inline-block;
+  width: 100%;
+  height: calc(1.5em + .75rem + 2px);
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-right: 0;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+::ng-deep .mearch .mat-form-field-underline {
+  bottom: 5px !important;
+  height: 0 !important;
+}
+::ng-deep .mearch .mat-form-field-wrapper {
+  padding-bottom: 5px !important;
+}
+::ng-deep .mearch .mat-form-field-infix {
+  padding: .5em 0;
+  border-top: .01em solid transparent;
+}
+::ng-deep .mearch .mat-form-field-label {
+  top: 2em !important;
+}
+.mybox{
+  border-radius: 0;
+  margin: 0;
+  height: 38px;
+  padding: 0 30px 0 16px;
+  background-color: transparent;
+  border: 1px solid #ced4da;
+}
+#box{
+  height: calc(1.5em + .75rem + 2px);
+  border-left: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  padding: 1px 0 0 8px;
+  background: #fff;
+  line-height: 1.7 !important;
+  margin-left: -2px;
+}
+.gh {
+  width: 1%;
+  vertical-align: middle;
+  min-width: 3px;
+}
+.fh{
+  border-right: none;
+}
+table{
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+::ng-deep .mat-tab-links {
+  max-width: 619px;
+  border: 1px solid #e6e6e6;
+  margin: 0 auto;
+}
+.scroll-to-top{
+  position: fixed;
+  background: url('../../assets/top-arrow.svg') no-repeat center 50%;
+  background-color: hsla(5,76%,62%,.8);
+  bottom: 0;
+  width: 3rem;
+  height: 3rem;
+  right: 385px;
+  cursor: pointer;
+  border-radius: 50%;
+}

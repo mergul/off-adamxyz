@@ -1,0 +1,132 @@
+<div (click)="$event.stopPropagation();$event.preventDefault()"
+  style="display: flex;flex-direction:row; margin-top: 20px">
+  <div style="align-self: flex-start;position: relative;">
+    <div mat-card-avatar class="header-image" [style.background-image]="url"></div>
+  </div>
+  <div
+    style="display: flex; width: -webkit-fill-available;width: -moz-available;background-color: #e9e9e9; border-radius: 20px;padding: 1px 3px 3px 10px;">
+    <form [formGroup]="myGroup" (ngSubmit)="OnSubmit(myGroup.value)" style="width: inherit; display: grid;" ngNativeValidate>
+      <mat-form-field style="width: -webkit-fill-available;width: -moz-available;">
+        <label style="max-height: 40px !important;">
+          <textarea matInput #myInput formControlName="news_comments" id="news_comment{{isDetail?'_'+newsId:'s_'+newsId}}"
+            placeholder="Leave a comment..." autocomplete="off" style="box-sizing: content-box;" cdkTextareaAutosize
+            cdkAutosizeMinRows="1" cdkAutosizeMaxRows="15" [value]="(speechMessages|async)?.transcript" aria-label="never">
+              </textarea>
+        </label>
+      </mat-form-field>
+    </form>
+    <ul style="display: flex; height: 40px;list-style-type: none; padding: 0;margin: auto 0 0 auto;">
+      <li>
+        <div #startButton (click)="startCamera()" mat-card-avatar class="example-header-image">
+          <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" [style.fill]="fillIt"
+            style="pointer-events: none; display: block; width: 100%; height: 100%">
+            <g>
+              <path
+                d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z">
+              </path>
+            </g>
+          </svg>
+        </div>
+      </li>
+      <li>
+        <div mat-card-avatar class="example-header-image">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 496 496" style="enable-background:new 0 0 496 496;" xml:space="preserve">
+            <path style="fill: #cb00ff;" d="M496,389.6c0,44.8-37.6,58.4-81.6,58.4H81.6C37.6,448,0,434.4,0,389.6V179.2C0,134.4,37.6,96,81.6,96  h332c44.8,0,82.4,38.4,82.4,83.2V389.6z"/>
+            <path style="fill:#c978dd;" d="M80,96h334.4c44,0,81.6,38.4,81.6,83.2v210.4c0,44.8-36,58.4-80.8,58.4"/>
+            <circle style="fill:#EAEAEA;" cx="248" cy="272" r="132"/>
+            <path style="fill:#C4C4C4;" d="M248,140.8c72.8,0,132,59.2,132,132s-59.2,132-132,132"/>
+            <circle style="fill:#2F423F;" cx="248" cy="272" r="87.2"/>
+            <circle style="fill:#009CC6;" cx="248" cy="272" r="52.8"/>
+            <path style="fill:#007E9B;" d="M248,219.2c29.6,0,52.8,24,52.8,52.8c0,29.6-24,52.8-52.8,52.8"/>
+            <g>
+              <path style="fill:#FFFFFF;" d="M246.4,243.2c0,16.8-13.6,30.4-30.4,30.4s-30.4-13.6-30.4-30.4s13.6-30.4,30.4-30.4   C232.8,212.8,246.4,226.4,246.4,243.2z"/>
+              <circle style="fill:#FFFFFF;" cx="282.4" cy="312.8" r="16"/>
+            </g>
+            <path style="fill:#EAEAEA;" d="M112,180c0,6.4-1.6,12-8,12H45.6c-6.4,0-13.6-5.6-13.6-12l0,0c0-6.4,5.6-12,12-12h56  C106.4,168,112,173.6,112,180L112,180z"/>
+            <path style="fill:#C4C4C4;" d="M48,168h56c6.4,0,12,6.4,12,13.6l0,0c0,6.4-5.6,11.2-12,11.2"/>
+            <path style="fill:#FFC114;" d="M72,88V68.8C72,57.6,82.4,48,93.6,48h75.2c12,0,23.2,11.2,23.2,22.4V88"/>
+            <path style="fill:#FCA12A;" d="M168.8,48H128v40h64V70.4C192,59.2,180.8,48,168.8,48z"/>
+            <circle style="fill:#3CC676;" cx="427.2" cy="371.2" r="30.4"/>
+            <path style="fill:#0AA06E;" d="M448.8,348.8c12,12,12,31.2,0,43.2s-31.2,12-43.2,0"/>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            </svg>
+        </div>
+      </li>
+      <li>
+        <div (click)="OnSubmit('')" mat-card-avatar class="example-header-image">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 493.6 493.6" style="enable-background:new 0 0 493.6 493.6;" xml:space="preserve">
+            <path style="fill:#edabff;" d="M397.6,135.6c-3.2,2.4-8,2.4-11.2-0.8c-0.8-0.8-1.6-1.6-1.6-3.2c-1.6-4-0.8-8,3.2-10.4L442.4,82  L31.2,186l139.2,91.2l136.8-98.4c1.6-0.8,3.2-1.6,4.8-1.6c2.4,0,4.8,0.8,6.4,2.4l0,0c4,4,3.2,10.4-0.8,13.6l-134.4,96L288,415.6  l171.2-324L397.6,135.6z M372,154l-28.8,20.8c-3.2,2.4-8,2.4-11.2-0.8l0,0c-0.8-0.8-1.6-1.6-1.6-3.2c-1.6-4-0.8-8,3.2-10.4  l28.8-20.8c1.6-0.8,3.2-1.6,4.8-1.6c2.4,0,4.8,0.8,6.4,2.4l0,0C376.8,144.4,376,150.8,372,154z"/>
+            <polygon style="fill:#E4C6A1;" points="175.2,306.8 214.4,354 157.6,378.8 "/>
+            <g>
+              <path style="fill:#42210B;" d="M372.8,140.4L372.8,140.4c4,4,3.2,10.4-0.8,13.6l-28.8,20.8c-3.2,2.4-8,2.4-11.2-0.8l0,0   c-0.8-0.8-1.6-1.6-1.6-3.2c-1.6-4-0.8-8,3.2-10.4l28.8-20.8c1.6-0.8,3.2-1.6,4.8-1.6C368.8,138,371.2,138.8,372.8,140.4z"/>
+              <path style="fill:#ad61f4;" d="M214.4,354l-39.2-47.2l-16.8,72L214.4,354z M459.2,90.8l-62.4,44.8c-3.2,2.4-8,2.4-11.2-0.8   c-0.8-0.8-1.6-1.6-1.6-3.2c-1.6-4,0-8,3.2-10.4L441.6,82L30.4,186l139.2,91.2l136.8-98.4c1.6-0.8,3.2-1.6,4.8-1.6   c2.4,0,4.8,0.8,6.4,2.4l0,0c4,4,3.2,10.4-0.8,13.6l-134.4,96L288,415.6L459.2,90.8z M492.8,58.8c0.8,1.6,0.8,2.4,0.8,4   c0,0.8,0,1.6-0.8,2.4l0,0c0,0,0,0.8-0.8,0.8L297.6,435.6c-1.6,2.4-4,4-7.2,4.8h-0.8c-2.4,0-4.8-0.8-6.4-3.2l-57.6-68.8L148,402.8   c-3.2,1.6-6.4,0.8-8.8-1.6c-2.4-2.4-4-5.6-3.2-8.8l24-100.8L4,189.2c-2.4-1.6-4-4.8-4-8.8c0.8-3.2,3.2-6.4,6.4-7.2l476-120   c0.8,0,1.6,0,2.4,0c1.6,0,2.4,0,3.2,0.8c0.8,0,0.8,0.8,1.6,0.8c0.8,0.8,2.4,1.6,2.4,3.2C492.8,58,492.8,58.8,492.8,58.8z"/>
+            </g>
+            <g>
+              <path style="fill:#D9CDC1;" d="M441.6,82l-238.4,60c36-7.2,145.6-22.4,195.2-29.6L441.6,82z"/>
+              <polygon style="fill:#D9CDC1;" points="459.2,90.8 419.2,119.6 310.4,373.2  "/>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            </svg>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

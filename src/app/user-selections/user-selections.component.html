@@ -1,0 +1,13 @@
+<div class="container">
+<form [formGroup]="clientForm" style="width: 500px; display: table; margin: 0 auto;">
+  <button class="butto ripple button-outline" (click)="selectallusers()">Select All Users</button>
+  <mat-selection-list formControlName="myOtherControl" #users
+    (selectionChange)="onSelection($event, users.selectedOptions.selected)">
+    <mat-list-option *ngFor="let user of this.service._hotBalance|async" [value]="user">
+      {{user.key}} = {{user.totalBalance.toFixed(2)}} TL
+    </mat-list-option>
+  </mat-selection-list>
+  <button class="butto ripple submit" [disabled]="!users.selectedOptions.hasValue()" type="submit" (click)="payMe()">Pay All</button>
+  <button class="butto ripple button-outline" (click)="deselectusers()">Deselect All Users</button>
+</form>
+</div>

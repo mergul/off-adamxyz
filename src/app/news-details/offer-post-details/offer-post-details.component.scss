@@ -1,0 +1,10 @@
+// ::ng-deep .mat-dialog-container {
+//   overflow-y: auto !important;
+// }
+::ng-deep .cdk-overlay-pane {
+  overflow-y: auto;
+}
+// ::ng-deep .cdk-overlay-container,
+// ::ng-deep .cdk-global-overlay-wrapper {
+//   overflow-y: auto !important;
+// }

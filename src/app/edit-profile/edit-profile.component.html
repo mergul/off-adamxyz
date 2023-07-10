@@ -1,0 +1,43 @@
+<h2>Edit Profile</h2>
+<div *ngIf="booled" class="container">
+  <div class="row">
+    <div>
+      <form *ngIf="_user" [formGroup]="profileForm">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="name" [(ngModel)]="_user.firstname" formControlName="name" placeholder="Name" class="form-control"/>
+        </div>
+        <div class="form-group">
+                              <label>Username</label>
+          <input type="username" [(ngModel)]="_user.username" formControlName="username" placeholder="Username" class="form-control"/>
+        </div>
+        <div class="form-group">
+                              <label>Email Address</label>
+          <input type="email" [(ngModel)]="_user.email" formControlName="email" placeholder="Email Address" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label>IBAN</label>
+          <input type="iban" [(ngModel)]="_user.iban" formControlName="iban" placeholder="IBAN" class="form-control"/>
+          <div class="alert-danger errormessageadduser" *ngIf="!profileForm.controls.iban.valid">Lütfen Geçerli bir IBAN ile Kaydet butonuna basınız!! </div>
+        </div>
+        <div class="form-group">
+                              <label>Password</label>
+          <input type="password" class="form-control" formControlName="password" placeholder="Password" autocomplete="new-password"/>
+          <label class="error">{{errorMessage}}</label>
+          <label class="success">{{successMessage}}</label>
+        </div>
+        <div class="form-group">
+                              <label>Confirm Password</label>
+          <input type="password" class="form-control" formControlName="password2" placeholder="Confirm Password" autocomplete="new-password"/>
+          <label class="error">{{errorMessage}}</label>
+          <label class="success">{{successMessage}}</label>
+        </div>
+        <div class='error' *ngIf="profileForm.controls.password2.touched">
+          <div class="alert-danger errormessageadduser" *ngIf="profileForm.hasError('mismatchedPasswords')">Passwords do not match</div>
+        </div>
+        <button id="kaydet" [disabled]="profileForm.pristine||(profileForm.hasError('mismatchedPasswords')||!profileForm.controls.email.valid||!profileForm.controls.iban.valid)" type="submit" (click)="trySave(profileForm.value)" class="butto ripple button-outline">Kaydet
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
