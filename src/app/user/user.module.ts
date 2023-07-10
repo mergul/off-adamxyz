@@ -7,11 +7,6 @@ import { IbanValidatorDirective } from '../iban-validator.directive';
 import { DialogDetailsContainerComponent } from '../news-details/dialog-details-container.component';
 import { DbUserResolver } from './db.user.resolver';
 import { GenericModalComponent } from '../shared-modal/generic-modal.component';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
 
 const routes: Routes = [
   {
