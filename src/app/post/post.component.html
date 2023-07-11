@@ -21,7 +21,7 @@
   </mat-card-actions>
 </mat-card> -->
 
-<a (click)="navigate()">
+<a (click)="navigate()" [style.width.px]="this._width">
   <section class="fi">
     <figure class="figure">
       <img class="figure-img" [src]="'assets/thumb-kapak-' + (news.thumb ? news.thumb : 'bae.jpeg')" width="250px"
@@ -32,7 +32,7 @@
   <section class="prf">
     <span class='date'>{{news.date | date:'medium'}}</span>
     <h1 class="article-title">{{news.topic}}</h1>
-    <p class="article-prf">Lorem ipsum dolor {{news.topics}}, {{news.newsOwnerId}}.<br>
+    <p class="article-prf">Lorem ipsum dolor {{news.topics}},<br> Demanded by {{news.newsOwnerId}}.<br>
     </p>
   </section>
 </a>

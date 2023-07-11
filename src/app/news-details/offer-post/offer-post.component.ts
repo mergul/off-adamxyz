@@ -18,7 +18,7 @@ export class OfferPostComponent implements OnInit {
   private _url!: string;
   private _offer!: OfferPayload;
   maNextDialog!: MatDialogRef<OfferPostDetailsComponent, any>;
-  private _width!: string;
+  public _width!: string;
   // myNextDialog!: MatDialogRef<CarouselComponent, any>;
 
   constructor(

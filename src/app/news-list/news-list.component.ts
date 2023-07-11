@@ -45,6 +45,7 @@ export class NewsListComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChildren('newsSum', { read: ElementRef })
   newsSum!: QueryList<ElementRef>;
   private _percentage: number = 0;
+  public _myWidth!: string;
 
   constructor(
     private newsService: NewsService,
@@ -135,6 +136,14 @@ export class NewsListComponent implements OnInit, OnDestroy, AfterViewInit {
       this.currentPage = 1;
       this.getStories();
     }
+  }
+  @Input()
+  get myWidth() {
+    return this._myWidth;
+  }
+
+  set myWidth(width: string) {
+    this._myWidth = '' + (+width - 40);
   }
   getStories = () => {
     this._newsList

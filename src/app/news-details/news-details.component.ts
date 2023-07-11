@@ -30,6 +30,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
   MatDialog,
+  MatDialogConfig,
 } from '@angular/material/dialog';
 import { CommentsComponent } from '../comments/comments.component';
 import { RecognitionResult } from '../core/speech-service';
@@ -199,15 +200,21 @@ export class NewsDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   offersList() {
-    this.maListDialog = this.modalService.open(OfferListComponent, {
-      id: '3',
-      autoFocus: false,
-      data: {
-        ids: this.news$.offers.filter((val) => val !== ''),
-        width: this.data.header$,
-        maxWidth: this.data.header$,
-      },
-    });
+    const matDialogConfig = new MatDialogConfig();
+    matDialogConfig.id = '3';
+    matDialogConfig.autoFocus = false;
+    matDialogConfig.width = this.data.header$ + 'px';
+    matDialogConfig.maxWidth = this.data.header$ + 'px';
+    matDialogConfig.data = {
+      ids: this.news$.offers.filter((val) => val !== ''),
+      width: this.data.header$,
+      maxWidth: this.data.header$,
+    };
+
+    this.maListDialog = this.modalService.open(
+      OfferListComponent,
+      matDialogConfig
+    );
   }
   btnClick(url: string) {
     this.maCurrentDialog = this.modalService.open(OfferComponent, {

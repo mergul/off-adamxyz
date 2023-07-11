@@ -68,11 +68,12 @@
             <div id="newsTags" style="margin-bottom: 20px">
                 <label *ngFor="let tag of news$.tags"><span> {{tag}} ; </span></label>
             </div>
-            <div id="newsOffers" style="margin-bottom: 20px; max-width: 199px;">
-                <button (click)="offersList()">Offers Made: </button>
-                <span style="float: right">{{news$.offers?.length}}</span>
+            <div id="newsOffers" style="margin-bottom: 20px; max-width: 250px;">
+                <button class="butto ripple button-outline" (click)="offersList()">Offers Made: </button>
+                <span id="treq">{{news$.offers?.length}}</span>
             </div>
-            <button id="modal" (click)="btnClick('upload')">Give An Offer!!!</button>
+            <button class="butto ripple button-outline" (click)="btnClick('upload')">Give An
+                Offer!!!</button>
             <app-comments [url]="'url(' + news$.ownerUrl + ')'" [isDetail]="true" [newsId]="news$.id"></app-comments>
         </div>
     </section>

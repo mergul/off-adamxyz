@@ -266,14 +266,14 @@ mat-form-field.my-options {
   transform: translateY(-3px);
   box-shadow: 0 2px 4px #d824ff;
 }
-// dialog {
-//   background-color: rgba(32, 82, 221, 0.5);
-//   color: white;
-//   border-color: transparent;
-//   overflow: hidden;
-//   border-radius: 5px;
-//   cursor: pointer;
-//   box-shadow: 0 0 20px 8px #d0d0d0;
-//   height: 100px;
-//   width: 200px;
-// }
+#treq {
+  float: right;
+  width: 50px;
+  height: 46px;
+  padding: 1px;
+  margin: 2px;
+  line-height: 46px;
+  border: 2px solid #c978dd;
+  border-radius: 4px;
+  text-align: center;
+}

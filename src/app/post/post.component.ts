@@ -36,6 +36,7 @@ export class PostComponent implements OnInit, OnDestroy {
   commentsComponent!: CommentsComponent;
   @ViewChild('miButton', { static: true })
   miButton!: ElementRef;
+  public _width!: string;
 
   constructor(
     private userService: UserService,
@@ -64,6 +65,14 @@ export class PostComponent implements OnInit, OnDestroy {
   set news(news: NewsPayload) {
     this._news = news;
     this._url = 'url(' + news.ownerUrl + ')';
+  }
+  @Input()
+  get myWidth() {
+    return this._width;
+  }
+
+  set myWidth(width: string) {
+    this._width = width;
   }
   over() {
     this.miButton.nativeElement.disabled =

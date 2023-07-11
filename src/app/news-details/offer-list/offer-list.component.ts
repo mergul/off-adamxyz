@@ -11,7 +11,7 @@ import { OfferPayload } from 'src/app/core/news.model';
 })
 export class OfferListComponent implements OnInit {
   offerList!: Observable<Array<OfferPayload>>;
-  _myWidth!: string;
+  public _myWidth!: string;
   private _urLinks!: Observable<Array<OfferPayload>>;
   constructor(
     @Optional() public dialogRef: MatDialogRef<OfferListComponent>,
@@ -19,7 +19,7 @@ export class OfferListComponent implements OnInit {
     private backendService: BackendServiceService
   ) {
     if (data && data.ids) {
-      this._myWidth = data.width;
+      this._myWidth = '' + (data.width - 40);
       this.offerList = this.backendService.getOffers(data.ids).pipe();
     }
   }
@@ -41,7 +41,7 @@ export class OfferListComponent implements OnInit {
   }
 
   set myWidth(width: string) {
-    this._myWidth = width;
+    this._myWidth = '' + (+width - 40);
   }
   byId(index: number, item: OfferPayload) {
     if (!item) {
