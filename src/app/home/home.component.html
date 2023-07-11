@@ -22,7 +22,8 @@
                             <app-news-list
                                 [newsList]="i === 0 ? newsService.newsStreamList$ : i === 1 ? newsService.tagsStreamList$ : newsService.peopleStreamList$"
                                 [percentage]="i === links.indexOf(activeLink) ? percentage : 0"
-                                [activeLink]="activeLink" [currLink]="review"></app-news-list>
+                                [activeLink]="activeLink" [currLink]="review"
+                                [iWidth]="''+this.itemWidth"></app-news-list>
                         </li>
                     </ul>
                 </div>

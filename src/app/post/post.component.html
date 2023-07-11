@@ -21,7 +21,7 @@
   </mat-card-actions>
 </mat-card> -->
 
-<a (click)="navigate()" [style.width.px]="this._width">
+<a (click)="navigate()" [style.width.px]="this._width" [style.height.px]="this._height">
   <section class="fi">
     <figure class="figure">
       <img class="figure-img" [src]="'assets/thumb-kapak-' + (news.thumb ? news.thumb : 'bae.jpeg')" width="250px"

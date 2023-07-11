@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('mytags', { static: true }) mytags!: ElementRef;
   @ViewChild('listContainer', { static: true }) listContainer!: ElementRef;
   private player!: AnimationPlayer;
-  private itemWidth = 617;
+  public itemWidth = 617;
   private currentSlide = 0;
   @ViewChild('carousel', { read: ElementRef, static: false }) carousel;
   isPub = of(true);

@@ -13,6 +13,7 @@ import {
 import { WindowRef } from '../core/window.service';
 import { SpeechService } from '../core/speech-service';
 import { News } from '../core/news.model';
+import { Overlay } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-details-container',
@@ -29,7 +30,8 @@ export class DialogDetailsContainerComponent implements OnDestroy {
     private winRef: WindowRef,
     private router: Router,
     private service: NewsService,
-    private speechService: SpeechService
+    private speechService: SpeechService,
+    overlay: Overlay
   ) {
     this.route.paramMap
       .pipe(
@@ -64,6 +66,7 @@ export class DialogDetailsContainerComponent implements OnDestroy {
             header$: modalWidth - 24,
           };
           dialogConfig.autoFocus = false;
+          dialogConfig.restoreFocus = false;
           this.currentDialog = this.modalService.open(
             NewsDetailsComponent,
             dialogConfig

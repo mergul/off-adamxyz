@@ -37,6 +37,7 @@ export class PostComponent implements OnInit, OnDestroy {
   @ViewChild('miButton', { static: true })
   miButton!: ElementRef;
   public _width!: string;
+  public _height = 136;
 
   constructor(
     private userService: UserService,
@@ -46,7 +47,9 @@ export class PostComponent implements OnInit, OnDestroy {
     private location: Location,
     private reactiveService: ReactiveStreamsService,
     private winRef: WindowRef
-  ) {}
+  ) {
+    this._height = (winRef.nativeWindow.innerHeight * 136) / 780;
+  }
 
   ngOnInit(): void {
     if (this.winRef.nativeWindow.innerWidth < 1080) {

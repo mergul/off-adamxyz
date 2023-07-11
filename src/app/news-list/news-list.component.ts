@@ -30,6 +30,7 @@ export class NewsListComponent implements OnInit, OnDestroy, AfterViewInit {
   currentPage = 0;
   currentOffset = 0;
   isUp = false;
+  _height = 136;
   newsListCounts = 0;
   private unsubscriber$: Subject<boolean> = new Subject<boolean>();
   destroy = new Subject();
@@ -52,7 +53,9 @@ export class NewsListComponent implements OnInit, OnDestroy, AfterViewInit {
     public location: Location,
     private renderer: Renderer2,
     private winRef: WindowRef
-  ) {}
+  ) {
+    this._height = (winRef.nativeWindow.innerHeight * 136) / 780;
+  }
   ngAfterViewInit(): void {
     if (
       !this.newsService.isConnected &&
@@ -144,6 +147,14 @@ export class NewsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   set myWidth(width: string) {
     this._myWidth = '' + (+width - 40);
+  }
+  @Input()
+  get iWidth() {
+    return this._myWidth;
+  }
+
+  set iWidth(width: string) {
+    this._myWidth = width;
   }
   getStories = () => {
     this._newsList
