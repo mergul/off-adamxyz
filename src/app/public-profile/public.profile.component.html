@@ -1,6 +1,6 @@
-<div class="container">
+<!-- <div class="container">
     <div class="row">
-        <div *ngIf="_user|async as userd" style="display: block; width: 100%">
+        <div *ngIf="_user|async as this.myUser" style="display: block; width: 100%">
             <div style="display: grid;">
                 <img *ngIf="back_url" align="left" class="fb-image-lg"
                     [src]="domSanitizer.bypassSecurityTrustUrl(back_url)" alt="asel">
@@ -8,16 +8,16 @@
                     [src]="domSanitizer.bypassSecurityTrustUrl(prof_url)" alt="asel">
             </div>
             <div style="display: flex; margin-top: 0;">
-                <div *ngIf="userd.id" [style.display]="isMobile ? 'grid' : 'flex'"
+                <div *ngIf="this.myUser.id" [style.display]="isMobile ? 'grid' : 'flex'"
                     style="margin: 0 auto;  width: min-content;">
                     <div [ngStyle]="listStyle"
                         style="padding: 20px; background-color: #F0F0F0; margin-top: 17px; margin-right: 20px; max-width: 390px;">
-                        @{{userd.username}}<br><br>
+                        @{{this.myUser.username}}<br><br>
                         <div>
                             <a *ngIf="userService.dbUser" routerLink="/camera"
-                                [state]="{userID: userService.dbUser.email, loggedID: userd.email}"
+                                [state]="{userID: userService.dbUser.email, loggedID: this.myUser.email}"
                                 style="color: #0013ff;text-decoration: none;background-color: transparent;">
-                                @{{userd.firstname}}'s LIVE ROOM</a>
+                                @{{this.myUser.firstname}}'s LIVE ROOM</a>
                         </div>
                         Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
                         sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
@@ -25,48 +25,114 @@
                         <br><br><br>
                         <button class="followee" #myInput (click)="contents()">İçerikler:
                         </button>
-                        <span style="float: right">{{getContentsCount(userd)}}</span><br>
+                        <span style="float: right">{{getContentsCount(this.myUser)}}</span><br>
                         <label>Görüntüleme: </label>
                         <span *ngIf="(service.newsStreamCounts$|async) as countz"
-                            style="float: right">{{countz.key=='@'+userd.id?countz.value:newsCounts.get('@'+userd.id)}}</span><br>
-                        <button (click)="proClick(userd.users)" class="followee">Takip Edilen Kişiler</button>
-                        <span style="float: right">{{userd.users.length}}</span><br>
-                        <button (click)="followTags(userd.tags)" class="followee">Takip Edilen Etiketler</button>
-                        <span style="float: right">{{userd.tags.length}}</span><br>
+                            style="float: right">{{countz.key=='@'+this.myUser.id?countz.value:newsCounts.get('@'+this.myUser.id)}}</span><br>
+                        <button (click)="proClick(this.myUser.users)" class="followee">Takip Edilen Kişiler</button>
+                        <span style="float: right">{{this.myUser.users.length}}</span><br>
+                        <button (click)="followTags(this.myUser.tags)" class="followee">Takip Edilen Etiketler</button>
+                        <span style="float: right">{{this.myUser.tags.length}}</span><br>
                         <button (click)="mineOffers()" class="followee" style="display: contents;">Yaptığım Teklifler
                             <span style="float: right">{{getPeopleOffers()}}</span>
                         </button><br>
-                        <button (click)="proClick(userd.followers)" class="followee">Takipçiler</button>
-                        <span style="float: right">{{userd.followers.length}}</span><br>
-                        <div *ngIf="userService.dbUser&&userd.id!==userService.dbUser.id"
+                        <button (click)="proClick(this.myUser.followers)" class="followee">Takipçiler</button>
+                        <span style="float: right">{{this.myUser.followers.length}}</span><br>
+                        <div *ngIf="userService.dbUser&&this.myUser.id!==userService.dbUser.id"
                             style="text-align: center; padding-top: 10px">
-                            <button class="butto ripple button-outline" (click)="tagClick(userd)">{{folli?'Takibi
+                            <button class="butto ripple button-outline" (click)="tagClick(this.myUser)">{{folli?'Takibi
                                 Kes':'Takip Et'}}</button>
                         </div>
-                        <div *ngIf="userService.dbUser&&userd.id!==userService.dbUser.id"
+                        <div *ngIf="userService.dbUser&&this.myUser.id!==userService.dbUser.id"
                             style="text-align: center; padding-top: 10px">
                             <button class="butto ripple button-outline"
-                                (click)="blockClick(userd)">{{userService.dbUser.blocked.includes(userd.id)?'Engeli
+                                (click)="blockClick(this.myUser)">{{userService.dbUser.blocked.includes(this.myUser.id)?'Engeli
                                 Kaldır':'Engelle'}}</button>
                         </div>
-                        <div *ngIf="userService.dbUser&&userService.dbUser.roles.includes('ROLE_ADMIN')&&!userd.roles.includes('ROLE_ADMIN')"
+                        <div *ngIf="userService.dbUser&&userService.dbUser.roles.includes('ROLE_ADMIN')&&!this.myUser.roles.includes('ROLE_ADMIN')"
                             style="text-align: center; padding-top: 10px">
                             <button class="butto ripple button-outline"
-                                (click)="roleClick(userd)">{{!userd.roles.includes('ROLE_MODERATOR')?'Moderator Yetkisi
+                                (click)="roleClick(this.myUser)">{{!this.myUser.roles.includes('ROLE_MODERATOR')?'Moderator Yetkisi
                                 Ver':'Moderator Yetkisi Kaldır'}}</button>
                         </div>
-                        <div *ngIf="userService.dbUser&&userService.dbUser.roles.includes('ROLE_ADMIN')&&!userd.roles.includes('ROLE_ADMIN')"
+                        <div *ngIf="userService.dbUser&&userService.dbUser.roles.includes('ROLE_ADMIN')&&!this.myUser.roles.includes('ROLE_ADMIN')"
                             style="text-align: center; padding-top: 10px">
                             <button class="butto ripple button-outline"
-                                (click)="deleteClick(userd)">{{userd.enabled?'Kullanıcıyı Sil':'Kullanıcıyı
+                                (click)="deleteClick(this.myUser)">{{this.myUser.enabled?'Kullanıcıyı Sil':'Kullanıcıyı
                                 Aktifleştir'}}</button>
                         </div>
                     </div>
-                    <app-profile-center [username]="userd.id" [boolUser]="boolUser" [user]="userd" [userIds]="_userIds"
+                    <app-profile-center [username]="this.myUser.id" [boolUser]="boolUser" [user]="this.myUser" [userIds]="_userIds"
                         [tagz]="tags" [isPub]="_isPub" [ngStyle]="compStyle"></app-profile-center>
                     <router-outlet></router-outlet>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div> -->
+
+<main id="user-profile">
+    <section class="top">
+        <figure class="figure">
+            <img class="image-bg" src="assets/back-img.jpeg" width="1351px" height="225px" alt="asel" />
+            <img class="image-profile" src="assets/profile-img.jpeg" width="192px" height="192px" alt="masel" />
+        </figure>
+    </section>
+    <section class="paths">
+        <ol>
+            <li *ngFor="let item of service.getBreadcrumbList()| async;let i=index;">
+                <a [routerLink]="[getUrl(item, i)]"> --> {{item}}</a>
+            </li>
+        </ol>
+    </section>
+    <section class="side">
+        <article class="resume">
+            <h1>Özgeçmiş</h1>
+            <p>Burada dünyaya geldi. Bu dünyada yetişti.</p>
+        </article>
+        <div *ngIf="this.myUser">
+            <button #myInput *ngIf="!location.isCurrentPathEqualTo('/user/edit')" class="followee"
+                (click)="contents()">İçerikler:
+                <span *ngIf="!location.isCurrentPathEqualTo('/user/edit')"
+                    style="float: right">{{getContentsCount(this.myUser)}}</span>
+            </button>
+            <br>
+            <label *ngIf="(service.newsStreamCounts$|async) as countz" style="margin: 5px 0;">Görüntüleme: <span
+                    style="float: right">{{countz.key=='@'+this.myUser.id?countz.value:newsCounts.get('@'+this.myUser.id)}}</span></label>
+            <br>
+            <button class="followee" (click)="proClick(this.myUser.users)">Takip Edilen Kişiler <span
+                    style="float: right">{{this.myUser.users ? this.myUser.users.length : 0}}</span>
+            </button>
+            <br>
+            <button (click)="followTags(this.myUser.tags)" class="followee">Takip
+                Edilen Etiketler <span style="float: right">{{this.myUser.tags ? this.myUser.tags.length : 0}}</span>
+            </button>
+            <br>
+            <button (click)="mineOffers()" class="followee">Yaptığım Teklifler <span
+                    style="float: right">{{getPeopleOffers()
+                    }}</span>
+            </button>
+            <br>
+            <button class="followee" (click)="proClick(this.myUser.followers)">Takipçiler <span
+                    style="float: right">{{this.myUser.followers ? this.myUser.followers.length : 0}}</span>
+            </button>
+            <br>
+            <div *ngIf="location.path().startsWith('/users/')" style="text-align: center; padding-top: 10px">
+                <button class="followee" (click)="tagClick(this.myUser)">Takip Et</button>
+            </div>
+            <div *ngIf="userService.dbUser&&this.myUser.id!==userService.dbUser.id"
+                style="text-align: center; padding-top: 10px">
+                <button class="butto ripple button-outline" (click)="tagClick(this.myUser)">{{folli?'Takibi
+                    Kes':'Takip Et'}}</button>
+            </div>
+            <div *ngIf="location.path().startsWith('/user/edit')" style="text-align: center; padding-top: 10px">
+                <button class="butto ripple button-outline" (click)="deleteClick(this.myUser)">Hesabımı Sil</button>
+            </div>
+        </div>
+    </section>
+    <section class="center" *ngIf="this.myUser">
+        <app-profile-center [username]="this.myUser.id" [boolUser]="boolUser" [user]="this.myUser" [userIds]="_userIds"
+            [tagz]="tags" [isPub]="_isPub" [ngStyle]="compStyle"></app-profile-center>
+        <router-outlet></router-outlet>
+    </section>
+</main>

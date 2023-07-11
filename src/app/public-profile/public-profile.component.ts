@@ -49,6 +49,7 @@ export class PublicProfileComponent
   listStyle = {};
   compStyle = {};
   private newslistUrl: string;
+  public myUser!: User;
   private myInput!: ElementRef;
   @ViewChild('myInput', { static: false })
   public set value(v: ElementRef) {
@@ -62,7 +63,7 @@ export class PublicProfileComponent
     private reactiveService: ReactiveStreamsService,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private location: Location,
+    public location: Location,
     private winRef: WindowRef,
     private renderer: Renderer2,
     public service: NewsService,
@@ -98,7 +99,7 @@ export class PublicProfileComponent
     this._username = window.history.state.userID;
     this._user = this.userService._otherUser;
     const myWis = this.winRef.nativeWindow.innerWidth;
-    const mwidth = myWis > 620 ? 620 : myWis;
+    const mwidth = 62;
     let rght = '0px';
     let lft = '0px';
     this.isMobile = this.winRef.nativeWindow.innerWidth < 620;
@@ -114,7 +115,12 @@ export class PublicProfileComponent
       marginLeft: lft,
     };
     this.compStyle = {
-      width: `${mwidth}px`,
+      width:
+        myWis > 1050
+          ? `${(((myWis * 2) / 3) * myWis) / 1600}px`
+          : !this.isMobile
+          ? `${mwidth}vw`
+          : '100vw',
       overflow: 'hidden',
       marginTop: '17px',
     };
@@ -368,6 +374,7 @@ export class PublicProfileComponent
           this.boolUser = of(0);
           return null;
         }
+        this.myUser = user;
         this._user = this.userService._otherUser = of(user);
         return user;
       })
@@ -397,5 +404,15 @@ export class PublicProfileComponent
   }
   getPeopleOffers(): number {
     return this.reactiveService.getOffersSubject('other').value.length;
+  }
+  getUrl(item: string, i: number) {
+    let prefix = './';
+    for (let index = 1; index < this.service.getPathsList().length; index++) {
+      const element = this.service.getPathsList()[index];
+      if (index < i) {
+        prefix += element + '/';
+      }
+    }
+    return i > 0 ? prefix + item : prefix;
   }
 }
