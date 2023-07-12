@@ -48,6 +48,15 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     private renderer: Renderer2,
     @Inject(DOCUMENT) private _document: Document
   ) {
+    if (!this.reactiveService.random) {
+      this.reactiveService.random =
+        Math.floor(Math.random() * (999999 - 100000)) + 100000;
+    }
+    this.newslistUrl =
+      '/sse/chat/room/TopNews' +
+      this.reactiveService.random +
+      '/subscribeMessages';
+
     this.router.events
       .pipe(
         filter(
@@ -80,14 +89,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         // }
       });
     this.myWis = this.winRef.nativeWindow.innerWidth;
-    if (!this.reactiveService.random) {
-      this.reactiveService.random =
-        Math.floor(Math.random() * (999999 - 100000)) + 100000;
-    }
-    this.newslistUrl =
-      '/sse/chat/room/TopNews' +
-      this.reactiveService.random +
-      '/subscribeMessages';
   }
   ngOnInit() {
     this._loggedinUser = this.authService.isLoggedIn();
@@ -230,15 +231,13 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
                   this.reactiveService.setListeners(
                     '@' + this.service._loggedUser.id
                   );
-                  return forkJoin([
-                    this.service.getDbUser(
-                      '/api/rest/start/user/' +
-                        this.service.user.id +
-                        '/' +
-                        this.reactiveService.random
-                    ),
-                    this.authService.token,
-                  ]);
+                  this.service._me = this.service.getDbUser(
+                    '/api/rest/start/user/' +
+                      this.service.user.id +
+                      '/' +
+                      this.reactiveService.random
+                  );
+                  return forkJoin([this.service._me, this.authService.token]);
                 }
                 return forkJoin([of(this.service.dbUser), of('')]);
               })

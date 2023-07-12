@@ -156,6 +156,12 @@ export class ReactiveStreamsService {
           );
         }
       });
+
+    // const worker = new Worker(new URL('../app.worker', import.meta.url));
+    // worker.onmessage = ({ data }) => {
+    //   console.log(`page got message: ${data}`);
+    // };
+    // worker.postMessage([JSON.stringify(this.newsEventSource), processName]);
   }
   listenMain(isMe: any, isOther: any, event: any): void {
     if (isMe) {

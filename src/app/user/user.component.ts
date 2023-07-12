@@ -78,29 +78,32 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
           }),
           switchMap((tok) => {
             if (this.userService.user) this.userService.user.token = tok;
-            return this.userService.getDbUser(
+            this.userService._me = this.userService.getDbUser(
               '/api/rest/user/' +
                 this.userService.user?.id +
                 '/' +
                 this.reactiveService.random +
                 '/0'
             );
+            return this.userService._me;
           })
         )
         .subscribe((user) => {
-          this.userService.setDbUser(user);
-          this.authService.changeEmitter.next(of(true));
-          this.authService.checkComplete = true;
+          if (user) {
+            this.userService.setDbUser(user);
+            this.authService.changeEmitter.next(of(true));
+            this.authService.checkComplete = true;
+          }
         });
     } else if (!this.authService.checkComplete) {
-      this.userService
-        .getDbUser(
-          '/api/rest/user/' +
-            this.userService.dbUser.id +
-            '/' +
-            this.reactiveService.random +
-            '/1'
-        )
+      this.userService._me = this.userService.getDbUser(
+        '/api/rest/user/' +
+          this.userService.dbUser.id +
+          '/' +
+          this.reactiveService.random +
+          '/1'
+      );
+      this.userService._me
         .pipe(takeUntil(this.onDestroy))
         .subscribe((user) => this.authService.changeEmitter.next(of(true)));
     }

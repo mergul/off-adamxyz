@@ -1,11 +1,11 @@
 <div id="modal-content-wrapper">
-    <header id="modal-header">
+    <header id="modal-header" [ngStyle]="wideStyle">
         <button type="button" class="close" (click)="onClose('')" aria-label="Close">
             <span aria-hidden="true"
                 style="font-weight: bolder; font-size: xx-large;line-height: 30px !important;">&times;</span>
         </button>
     </header>
-    <section id="modal-body">
+    <section id="modal-body" [ngStyle]="wideStyle">
         <div id="newsContent">
             <div id="ContentPlaceHolder1_mansetDiv" class="sliderrr-wrapper" [ngStyle]="sliderWrapperStyle">
                 <div class="bx-wrapper">
@@ -77,7 +77,7 @@
             <app-comments [url]="'url(' + news$.ownerUrl + ')'" [isDetail]="true" [newsId]="news$.id"></app-comments>
         </div>
     </section>
-    <footer id="modal-footer" style="display: flex;justify-content: space-between;">
+    <footer id="modal-footer" [ngStyle]="wideStyle" style="display: flex;justify-content: space-between;">
         <button id="closes" type="button" class="butto ripple button-outline" (click)="onClose('')">Close</button>
         <app-news-manage *ngIf="isManager" [news]="news$"></app-news-manage>
     </footer>

@@ -38,6 +38,7 @@ export class PostComponent implements OnInit, OnDestroy {
   miButton!: ElementRef;
   public _width!: string;
   public _height = 136;
+  _isMiddle = false;
 
   constructor(
     private userService: UserService,
@@ -49,6 +50,10 @@ export class PostComponent implements OnInit, OnDestroy {
     private winRef: WindowRef
   ) {
     this._height = (winRef.nativeWindow.innerHeight * 136) / 780;
+    this._isMiddle =
+      (winRef.nativeWindow.innerWidth >= 601 &&
+        winRef.nativeWindow.innerWidth <= 800) ||
+      winRef.nativeWindow.innerWidth <= 400;
   }
 
   ngOnInit(): void {

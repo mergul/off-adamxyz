@@ -13,7 +13,7 @@ span.date {
 }
 a {
   position: relative;
-  border: 1px solid khaki;
+  // border: 1px solid khaki;
   background-color: #f6f6f68c;
   text-decoration: none;
   display: grid;
@@ -38,7 +38,7 @@ a {
   img {
     width: 100%;
     object-fit: cover;
-    height: calc(109 * (100vw / 1536));
+    height: 132px; //calc(109 * (100vw / 1536));;
   }
   figcaption {
     position: absolute;
@@ -84,11 +84,11 @@ a {
 @media screen and (max-width: 600px) and (min-width: 416px) {
   a {
     grid-template-columns: repeat(auto-fit, minmax(117px, 1fr)) !important;
-    section.fi {
-      figure img {
-        height: calc(228 * (100vw / 1536)) !important;
-      }
-    }
+    // section.fi {
+    //   figure img {
+    //     height: calc(228 * (100vw / 1536)) !important;
+    //   }
+    // }
   }
 }
 @media screen and (max-width: 415px) {

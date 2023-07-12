@@ -117,12 +117,10 @@
                     style="float: right">{{this.myUser.followers ? this.myUser.followers.length : 0}}</span>
             </button>
             <br>
-            <div *ngIf="location.path().startsWith('/users/')" style="text-align: center; padding-top: 10px">
-                <button class="followee" (click)="tagClick(this.myUser)">Takip Et</button>
-            </div>
             <div *ngIf="userService.dbUser&&this.myUser.id!==userService.dbUser.id"
                 style="text-align: center; padding-top: 10px">
-                <button class="butto ripple button-outline" (click)="tagClick(this.myUser)">{{folli?'Takibi
+                <button class="butto ripple button-outline"
+                    (click)="tagClick(this.myUser)">{{userService.dbUser.users.includes(myUser.id)?'Takibi
                     Kes':'Takip Et'}}</button>
             </div>
             <div *ngIf="location.path().startsWith('/user/edit')" style="text-align: center; padding-top: 10px">

@@ -35,6 +35,7 @@ export class PublicProfileComponent
   private _back_url = '/assets/back-img.jpeg';
   _userIds: string[] = [];
   folli: boolean = false;
+  followee!: Observable<boolean>;
   private _tags!: Observable<Array<string>>;
   subscription_newslist: Subscription = new Subscription();
   isMobile = false;
@@ -77,6 +78,10 @@ export class PublicProfileComponent
       '/sse/chat/room/TopNews' +
       this.reactiveService.random +
       '/subscribeMessages';
+    // this.followee = userService._me.pipe(
+    //   takeUntil(this.onDestroy),
+    //   map((user) => user != null && user.users.includes(this.myUser.id))
+    // );
   }
   @Input()
   get username(): string {

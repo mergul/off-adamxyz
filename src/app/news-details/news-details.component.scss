@@ -34,15 +34,15 @@ mat-form-field.speech-result-width {
     height: (109 * (4 / 5) + 10) px;
     line-height: (109 * (4 / 5) + 10) px;
   }
-  #modal-body {
-    width: calc(100vw - (100 * 100vw / 908) - 24px);
-  }
-  #modal-header {
-    width: calc(100vw - (100 * 100vw / 908) - 24px);
-  }
-  #modal-footer {
-    width: calc(100vw - (100 * 100vw / 908) - 24px);
-  }
+  // #modal-body {
+  //   width: calc(100vw - (100 * 100vw / 908) - 24px);
+  // }
+  // #modal-header {
+  //   width: calc(100vw - (100 * 100vw / 908) - 24px);
+  // }
+  // #modal-footer {
+  //   width: calc(100vw - (100 * 100vw / 908) - 24px);
+  // }
 }
 @media only screen and (min-width: 1080px) {
   #sliderrr-pager {

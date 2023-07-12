@@ -42,13 +42,14 @@ export class AuthsGuard implements CanActivate {
                     this.userService._loggedUser.id = this.userService.user.id =
                       this.userService.createId(us.uid);
                     this.userService.setReactiveListeners();
+                    this.userService._me = this.userService.getDbUser(
+                      '/api/rest/start/user/' +
+                        this.userService.user.id +
+                        '/' +
+                        this.userService.getRandom()
+                    );
                     return forkJoin([
-                      this.userService.getDbUser(
-                        '/api/rest/start/user/' +
-                          this.userService.user.id +
-                          '/' +
-                          this.userService.getRandom()
-                      ),
+                      this.userService._me,
                       this.authService.token,
                     ]);
                   }

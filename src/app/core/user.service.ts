@@ -90,10 +90,11 @@ export class UserService implements OnDestroy {
         } else {
           url = '/api/rest/users/get/' + logged.email + '/a';
         }
-        this.getDbUser(url + '/' + this.reactiveService.random)
+        this._me = this.getDbUser(url + '/' + this.reactiveService.random);
+        this._me
           .pipe(
             map((muser) => {
-              this.setDbUser(muser);
+              if (muser) this.setDbUser(muser);
             })
           )
           .subscribe();

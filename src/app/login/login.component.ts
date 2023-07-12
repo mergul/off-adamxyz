@@ -92,32 +92,34 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
         first(),
         switchMap((token) => {
           if (this.userService.user) this.userService.user.token = token;
-          return this.userService.getDbUser(
+          this.userService._me = this.userService.getDbUser(
             '/api/rest/user/' +
               this.userService.user?.id +
               '/' +
               this.userService.getRandom() +
               '/0'
           );
+          return this.userService._me;
         }),
         switchMap((tokens) => {
-          this.userService.setDbUser(tokens);
-          return of(this.onClose('user'));
+          if (tokens) {
+            this.userService.setDbUser(tokens);
+            return of(this.onClose('user'));
+          }
+          return of(this.onClose('home'));
         })
       );
     } else {
       this.authService.checkComplete = false;
-      return forkJoin([
-        this.userService.getDbUser(
-          '/api/rest/start/user/' +
-            this.userService.user.id +
-            '/' +
-            this.userService.getRandom()
-        ),
-        from(user.getIdToken()),
-      ]).pipe(
+      this.userService._me = this.userService.getDbUser(
+        '/api/rest/start/user/' +
+          this.userService.user.id +
+          '/' +
+          this.userService.getRandom()
+      );
+      return forkJoin([this.userService._me, from(user.getIdToken())]).pipe(
         mergeMap((tokens) => {
-          this.userService.setDbUser(tokens[0]);
+          if (tokens[0]) this.userService.setDbUser(tokens[0]);
           if (this.userService.user) this.userService.user.token = tokens[1];
           return this.userService.redirectUrl !== 'login'
             ? of(this.onClose(this.userService.redirectUrl))
