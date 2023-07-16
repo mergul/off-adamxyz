@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, Renderer2, RendererFactory2 } from '@angular/core';
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { NewsPayload, OfferPayload } from './news.model';
@@ -24,6 +24,7 @@ export class ReactiveStreamsService {
   private followedPeopleOffers = new BehaviorSubject<OfferPayload[]>([]);
   private publicOffersSubject = new BehaviorSubject<OfferPayload[]>([]);
   private balanceBehaviorSubject = new BehaviorSubject<BalanceRecord[]>([]);
+  private renderer!: Renderer2;
 
   publicStreamList$: Map<string, NewsPayload[]> = new Map<
     string,
@@ -44,14 +45,27 @@ export class ReactiveStreamsService {
   random: number = 0;
   isSubscribed = true;
   index: number = 0;
+  mainlistenerFn = () => {};
+  mainlistenerStartFn = () => {};
+  mainTaglistenerFn = () => {};
+  mainCountlistenerFn = () => {};
+  meLıstenerStartFn = () => {};
+  myPeoplelistenerFn = () => {};
+  myTagslistenerFn = () => {};
+  offerslistenerFn = () => {};
+  offersStartlistenerFn = () => {};
+
   topNewsList: Map<string, Array<string>> = new Map<string, Array<string>>();
   mainxListener!: (ev: any, ism: any, iso: any) => void;
   mainTagxListener!: (ev: any, ism: any, iso: any) => void;
   mainCouxListener!: (ev: any, ism: any, iso: any) => void;
 
-  mexListener!: (ev: any, ism: any, iso: any) => void;
-  hexListener!: (ev: any, ism: any, iso: any) => void;
-  myxListener!: (ev: any, ism: any, iso: any) => void;
+  mexListener!: (ev: any, ism: any, iso: any, ist: any, isp: any) => void;
+  otherxListener!: (ev: any, ism: any, iso: any, ist: any, isp: any) => void;
+  myTagxListener!: (ev: any, ism: any, iso: any, ist: any, isp: any) => void;
+  myPeoplexListener!: (ev: any, ism: any, iso: any, ist: any, isp: any) => void;
+  minexListener!: (ev: any, ism: any, iso: any, ist: any, isp: any) => void;
+
   meOfferListener!: (ev: any, ism: any, iso: any) => void;
   myOfferListener!: (ev: any, ism: any, iso: any) => void;
   thyOfferListener!: (ev: any, ism: any, iso: any) => void;
@@ -60,13 +74,22 @@ export class ReactiveStreamsService {
   mainTagListener: any;
   mainCouListener: any;
   meListener: any;
-  heListener: any;
-  myListener: any;
+  mineListener: any;
+  othersListener: any;
+  myTagsListener: any;
+  myPeopleListener: any;
+
   meOffListener: any;
   myOffListener: any;
   thyOffListener: any;
 
-  constructor(private zone: NgZone, protected http: HttpClient) {}
+  constructor(
+    private zone: NgZone,
+    protected http: HttpClient,
+    private rendererFactory: RendererFactory2
+  ) {
+    this.renderer = this.rendererFactory.createRenderer(null, null);
+  }
   getNewsStream(processName: number, url: string) {
     this.processName = processName;
     let headers: HttpHeaders = new HttpHeaders();
@@ -86,55 +109,103 @@ export class ReactiveStreamsService {
     this.mainTagListener = this.mainTagxListener.bind(this, false, true);
     this.mainCouxListener = (ev, ism, iso) => this.listenMain(ev, ism, iso);
     this.mainCouListener = this.mainCouxListener.bind(this, false, false);
-    this.mexListener = (ev, ism, iso) => this.listenIt(ev, ism, iso);
-    this.meListener = this.mexListener.bind(this, true, false);
-    this.hexListener = (ev, ism, iso) => this.listenIt(ev, ism, iso);
-    this.heListener = this.hexListener.bind(this, false, true);
-    this.myxListener = (ev, ism, iso) => this.listenIt(ev, ism, iso);
-    this.myListener = this.myxListener.bind(this, false, false);
+
+    this.mexListener = (ev, ism, iso, ist, isp) =>
+      this.listenIt(ev, ism, iso, ist, isp);
+    this.meListener = this.mexListener.bind(this, true, false, false, false);
+    this.otherxListener = (ev, ism, iso, ist, isp) =>
+      this.listenIt(ev, ism, iso, ist, isp);
+    this.othersListener = this.otherxListener.bind(
+      this,
+      false,
+      true,
+      false,
+      false
+    );
+    this.myPeoplexListener = (ev, ism, iso, ist, isp) =>
+      this.listenIt(ev, ism, iso, ist, isp);
+    this.myPeopleListener = this.myPeoplexListener.bind(
+      this,
+      false,
+      false,
+      false,
+      true
+    );
+    this.myTagxListener = (ev, ism, iso, ist, isp) =>
+      this.listenIt(ev, ism, iso, ist, isp);
+    this.myTagsListener = this.myTagxListener.bind(
+      this,
+      false,
+      false,
+      true,
+      false
+    );
+    this.minexListener = (ev, ism, iso, ist, isp) =>
+      this.listenIt(ev, ism, iso, ist, isp);
+    this.mineListener = this.minexListener.bind(
+      this,
+      false,
+      false,
+      false,
+      false
+    );
+
     this.meOfferListener = (ev, ism, iso) => this.listenOffer(ev, ism, iso);
     this.meOffListener = this.meOfferListener.bind(this, true, false);
     this.myOfferListener = (ev, ism, iso) => this.listenOffer(ev, ism, iso);
     this.myOffListener = this.myOfferListener.bind(this, false, true);
     this.thyOfferListener = (ev, ism, iso) => this.listenOffer(ev, ism, iso);
     this.thyOffListener = this.thyOfferListener.bind(this, false, false);
-    this.newsEventSource.addEventListener(
-      'top-news-' + processName,
-      this.mainListener,
-      true
+
+    this.mainlistenerFn = this.renderer.listen(
+      this.newsEventSource,
+      'top-news',
+      this.mainListener
     );
-    setTimeout(() => {
-      this.newsEventSource.addEventListener(
-        'top-tags',
-        this.mainTagListener,
-        true
-      );
-    }, 1);
-    setTimeout(() => {
-      this.newsEventSource.addEventListener(
-        'user-counts',
-        this.mainCouListener,
-        true
-      );
-    }, 2);
-    setTimeout(() => {
-      this.newsEventSource.addEventListener(
-        'top-offers-' + processName,
-        (event) => {
-          const topOffers = JSON.parse(event.data);
-          const list = this.offersSubject.getValue();
-          this.zone.run(() => {
-            if (!this.isSubscribed) {
-              list.splice(this.index, topOffers.list.length, ...topOffers.list);
-              this.offersSubject.next([...list]);
-              this.index += topOffers.list.length;
-            } else {
-              this.offersSubject.next([...list, ...topOffers.list]);
-            }
-          });
-        }
-      );
-    }, 3);
+    this.offerslistenerFn = this.renderer.listen(
+      this.newsEventSource,
+      'top-offers',
+      (event) => {
+        const topOffers = JSON.parse(event.data);
+        const list = this.offersSubject.getValue();
+        this.zone.run(() => {
+          this.offersSubject.next([...list, ...topOffers.list]);
+        });
+      }
+    );
+    this.mainlistenerStartFn = this.renderer.listen(
+      this.newsEventSource,
+      'top-news-' + processName,
+      this.mainListener
+    );
+    this.mainTaglistenerFn = this.renderer.listen(
+      this.newsEventSource,
+      'top-tags',
+      this.mainTagListener
+    );
+    this.mainCountlistenerFn = this.renderer.listen(
+      this.newsEventSource,
+      'user-counts',
+      this.mainCouListener
+    );
+    this.offersStartlistenerFn = this.renderer.listen(
+      this.newsEventSource,
+      'top-offers-' + processName,
+      (event) => {
+        const topOffers = JSON.parse(event.data);
+        const list = this.offersSubject.getValue();
+        this.zone.run(() => {
+          if (!this.isSubscribed) {
+            list.splice(this.index, topOffers.list.length, ...topOffers.list);
+            this.offersSubject.next([...list]);
+            this.index += topOffers.list.length;
+          } else {
+            this.offersSubject.next([...list, ...topOffers.list]);
+          }
+        });
+      }
+    );
+
     this.newsEventSource.addEventListener('close', (event) => {
       this.closeSources();
     });
@@ -185,27 +256,38 @@ export class ReactiveStreamsService {
     }
   }
   resetMainListeners() {
-    this.newsEventSource.removeEventListener(
-      'top-news-' + this.processName,
-      this.mainListener,
-      true
-    );
-    this.newsEventSource.removeEventListener(
-      'top-tags',
-      this.mainTagListener,
-      true
-    );
-    this.newsEventSource.removeEventListener(
-      'user-counts',
-      this.mainCouListener,
-      true
-    );
+    this.mainlistenerStartFn();
+    this.mainlistenerFn();
+    this.mainTaglistenerFn();
+    this.mainCountlistenerFn();
+    this.offersStartlistenerFn();
+    this.offerslistenerFn();
+    // this.newsEventSource.removeEventListener(
+    //   'top-news-' + this.processName,
+    //   this.mainListener,
+    //   true
+    // );
+    // this.newsEventSource.removeEventListener(
+    //   'top-news',
+    //   this.mainListener,
+    //   true
+    // );
+    // this.newsEventSource.removeEventListener(
+    //   'top-tags',
+    //   this.mainTagListener,
+    //   true
+    // );
+    // this.newsEventSource.removeEventListener(
+    //   'user-counts',
+    //   this.mainCouListener,
+    //   true
+    // );
   }
   listenOffer(isMe: any, isOther: any, event: any): void {
     if (isMe) {
       this.addOfferSubject(this.getOffersSubject('me'), event);
     } else if (isOther) {
-      this.addToSubjectOffer(this.getOffersSubject('my'), event);
+      this.addOfferSubject(this.getOffersSubject('my'), event);
     } else if (event.lastEventId === 'people' || event.lastEventId === 'tags') {
       this.addToSubjectOffer(this.getOffersSubject(event.lastEventId), event);
     } else if (event.lastEventId === 'my') {
@@ -236,9 +318,9 @@ export class ReactiveStreamsService {
         }
       });
       subj.next(array3);
-      if (event.lastEventId === 'me' || event.lastEventId === 'my') {
+      if (event.lastEventId === 'my') {
         this.publicOfferList$.set(
-          event.type.split('-')[2].substring(1),
+          event.type.split('-')[2].substring(2),
           topOffers.list
         );
       }
@@ -334,26 +416,6 @@ export class ReactiveStreamsService {
       const userCounts = JSON.parse(event.data);
       this.zone.run(() => this.countsBehaviorSubject.next(userCounts));
     });
-    this.newsEventSource.addEventListener('user-history-' + id, (event) => {
-      const balances = JSON.parse(event.data);
-      const list = this.balanceBehaviorSubject.getValue();
-      if (list.length > 0) {
-        list.push(balances);
-      } else list.push(...balances);
-      this.zone.run(() => this.balanceBehaviorSubject.next(list));
-    });
-    this.newsEventSource.addEventListener('hotRecords-' + id, (event) => {
-      const balances = JSON.parse(event.data);
-      const list = this.hotUsersBehaviorSubject.getValue();
-      if (list.length > 0) {
-        let index = -1;
-        list.some(function (elem, i) {
-          return elem.key === balances.key && ~(index = i);
-        });
-        if (index !== -1) list.splice(index, 1, balances);
-      } else list.push(...balances);
-      this.zone.run(() => this.hotUsersBehaviorSubject.next(list));
-    });
   }
   setFirstListeners(id: string) {
     const myB = this.topNewsList.get('top-news-' + id);
@@ -373,10 +435,10 @@ export class ReactiveStreamsService {
       }
     }
     this.topNewsList.set('top-news-' + id, ['me']);
-    this.newsEventSource.addEventListener(
+    this.meLıstenerStartFn = this.renderer.listen(
+      this.newsEventSource,
       'top-news-' + id + '-' + this.random,
-      this.meListener,
-      true
+      this.meListener
     );
     this.newsEventSource.addEventListener(
       'top-offers-' + id + '-' + this.random,
@@ -388,20 +450,20 @@ export class ReactiveStreamsService {
       this.myOffListener,
       true
     );
-    this.newsEventSource.addEventListener(
+    this.myPeoplelistenerFn = this.renderer.listen(
+      this.newsEventSource,
       'top-news-people-' + id + '-' + this.random,
-      this.myListener,
-      true
+      this.myPeopleListener
     );
     this.newsEventSource.addEventListener(
       'top-offers-people-' + id + '-' + this.random,
       this.thyOffListener,
       true
     );
-    this.newsEventSource.addEventListener(
+    this.myTagslistenerFn = this.renderer.listen(
+      this.newsEventSource,
       'top-news-tags-' + id + '-' + this.random,
-      this.myListener,
-      true
+      this.myTagsListener
     );
     this.newsEventSource.addEventListener(
       'top-offers-tags-' + id + '-' + this.random,
@@ -414,21 +476,28 @@ export class ReactiveStreamsService {
     const list = subj.getValue();
     this.zone.run(() => subj.next([...list, ...topNews.list]));
   };
-  listenIt = (isMe, isOther, event: any) => {
+  listenIt = (isMe, isOther, isTags, isPeople, event: any) => {
     if (isMe) {
-      this.addToSubjectSingle(this.getNewsSubject('me'), event);
+      this.addToSubject(this.getNewsSubject('me'), event);
+      this.meLıstenerStartFn();
     } else if (isOther) {
-      this.addToSubjectSingle(this.getNewsSubject('other'), event);
+      this.addToSubject(this.getNewsSubject('other'), event);
       this.publicStreamList$.set(
         event.type.split('-')[2].substring(1),
         this.publicBehaviorSubject.getValue()
       );
-    } else if (event.lastEventId === 'people' || event.lastEventId === 'tags') {
-      this.addToSubjectSingle(this.getNewsSubject(event.lastEventId), event);
-    } else if (event.lastEventId === 'me') {
+    } else if (isPeople) {
       this.addToSubject(this.getNewsSubject('people'), event);
-    } else if (event.lastEventId === 'tag') {
+      this.myPeoplelistenerFn();
+    } else if (isTags) {
       this.addToSubject(this.getNewsSubject('tags'), event);
+      this.myTagslistenerFn();
+    } else if (event.lastEventId === 'person' || event.lastEventId === 'tag') {
+      this.addToSubject(this.getNewsSubject('other'), event);
+      this.publicStreamList$.set(
+        event.type.split('-')[2].substring(1),
+        this.publicBehaviorSubject.getValue()
+      );
     }
   };
   addToSubject = (subj: BehaviorSubject<NewsPayload[]>, event: any) => {
@@ -438,7 +507,11 @@ export class ReactiveStreamsService {
       const array3: NewsPayload[] = [];
       subj.getValue().map((xx) => {
         array2.push(xx.newsId);
-        array3.push(xx);
+        topNews.list.forEach((payload: NewsPayload) => {
+          if (payload.newsId === xx.newsId) {
+            array3.push(xx);
+          }
+        });
       });
       topNews.list.forEach((df: NewsPayload) => {
         if (!array2.includes(df.newsId)) {
@@ -457,12 +530,12 @@ export class ReactiveStreamsService {
   resetUserListListeners(id: string, isMe = false) {
     this.newsEventSource.removeEventListener(
       'top-news-' + id,
-      this.myListener,
+      this.mineListener,
       true
     );
     this.newsEventSource.removeEventListener(
       'top-news-' + id + '-' + this.random,
-      this.myListener,
+      this.mineListener,
       true
     );
     if (id.charAt(0) === '@') {
@@ -492,31 +565,29 @@ export class ReactiveStreamsService {
     }
   }
   setUserListListeners(id: string) {
-    if (id.charAt(0) === '@') {
-      const myB = this.topNewsList.get('top-news-' + id);
-      if (myB) myB.push('follow');
-      else this.topNewsList.set('top-news-' + id, ['follow']);
-    }
+    const myB = this.topNewsList.get('top-news-' + id);
+    if (myB) myB.push('follow');
+    else this.topNewsList.set('top-news-' + id, ['follow']);
     this.newsEventSource.addEventListener(
       'top-news-' + id + '-' + this.random,
-      this.myListener,
+      this.mineListener,
       true
     );
     this.newsEventSource.addEventListener(
       'top-news-' + id,
-      this.myListener,
+      this.mineListener,
       true
     );
   }
   resetOtherListListeners(id: string, isMe = false) {
     this.newsEventSource.removeEventListener(
       'top-news-' + id,
-      this.heListener,
+      this.othersListener,
       true
     );
     this.newsEventSource.removeEventListener(
       'top-news-' + id + '-' + this.random,
-      this.heListener,
+      this.othersListener,
       true
     );
     const myB = this.topNewsList.get('top-news-' + id);
@@ -526,11 +597,11 @@ export class ReactiveStreamsService {
         this.meListener,
         true
       );
-      this.newsEventSource.removeEventListener(
-        'top-news-' + id + '-' + this.random,
-        this.meListener,
-        true
-      );
+      // this.newsEventSource.removeEventListener(
+      //   'top-news-' + id + '-' + this.random,
+      //   this.meListener,
+      //   true
+      // );
       this.meBehaviorSubject.next([]);
       if (myB)
         this.topNewsList.set(
@@ -550,12 +621,12 @@ export class ReactiveStreamsService {
     this.resetOtherListListeners(id, true);
     this.newsEventSource.removeEventListener(
       'top-news-tags-' + id + '-' + this.random,
-      this.myListener,
+      this.myTagsListener,
       true
     );
     this.newsEventSource.removeEventListener(
       'top-news-people-' + id + '-' + this.random,
-      this.myListener,
+      this.myPeopleListener,
       true
     );
     this.followedPeopleSubject.next([]);
@@ -563,16 +634,17 @@ export class ReactiveStreamsService {
     this.unsubscribeResource();
   }
   setOtherListener(id: string) {
+    console.log('setOtherListener id: ', id);
     if (!this.topNewsList.has('top-news-' + id)) {
       this.topNewsList.set('top-news-' + id, ['other']);
       this.newsEventSource.addEventListener(
         'top-news-' + id + '-' + this.random,
-        this.heListener,
+        this.othersListener,
         true
       );
       this.newsEventSource.addEventListener(
         'top-news-' + id,
-        this.heListener,
+        this.othersListener,
         true
       );
       this.newsEventSource.addEventListener('user-counts-' + id, (event) => {
@@ -591,16 +663,15 @@ export class ReactiveStreamsService {
           .filter((val) => val.newsOwnerId === id.substring(1))
       );
     }
-    const sal = this.followedPeopleOffers
-      .getValue()
-      .filter((val) => val.ownerId === id.substring(1));
-    if (sal.length == 0) {
-      this.newsEventSource.addEventListener(
-        'top-offers-' + id + '-' + this.random,
-        this.thyOffListener,
-        true
-      );
-    } else this.publicOffersSubject.next(sal);
+    this.newsEventSource.addEventListener(
+      'top-offers-' + '@' + id + '-' + this.random,
+      this.thyOffListener,
+      true
+    );
+    // const sal = this.followedPeopleOffers
+    //   .getValue()
+    //   .filter((val) => val.ownerId === id.substring(1));
+    // if (sal.length > 0) this.publicOffersSubject.next(sal);
   }
   statusOfNewsSource = () => {
     return this.newsEventSource;

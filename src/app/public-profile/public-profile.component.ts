@@ -140,25 +140,23 @@ export class PublicProfileComponent
             : '#' + this._username;
           return this.findMother();
         }),
-        switchMap((sed) => {
+        switchMap((otherUser) => {
+          this.reactiveService.setOtherListener('@' + this.userID);
           const listim = this.reactiveService.publicStreamList$.get(
             this.userID
           );
-          if (!listim) {
-            this.reactiveService.setOtherListener('@' + this.userID);
-            return this.service.setNewsUser(
-              '@' + this.userID,
-              this.reactiveService.random
-            );
-          } else {
+          if (listim) {
             this.reactiveService.getNewsSubject('other').next(listim);
             const offers = this.reactiveService.publicOfferList$.get(
               this.userID
             );
             if (offers)
               this.reactiveService.getOffersSubject('other').next(offers);
-            return of(true);
           }
+          return this.service.setNewsUser(
+            '@' + this.userID,
+            this.reactiveService.random
+          );
         })
       )
       .subscribe((asw) => {
@@ -231,21 +229,16 @@ export class PublicProfileComponent
               this.findMother()
                 .toPromise()
                 .then((a) => {
+                  this.reactiveService.setOtherListener('@' + this.userID);
                   const listim = this.reactiveService.publicStreamList$.get(
                     this.userID
                   );
-                  if (!listim) {
-                    this.reactiveService.setOtherListener('@' + this.userID);
-                    return this.service
-                      .setNewsUser(
-                        '@' + this.userID,
-                        this.reactiveService.random
-                      )
-                      .toPromise();
-                  } else {
+                  if (listim) {
                     this.reactiveService.getNewsSubject('other').next(listim);
-                    return of(true).toPromise();
                   }
+                  return this.service
+                    .setNewsUser('@' + this.userID, this.reactiveService.random)
+                    .toPromise();
                 })
                 .then((a) => console.log('findMother : ', a));
             }
