@@ -7,3 +7,5 @@
 //   },
 //   "include": ["src/**/*.worker.ts"]
 // }
+//  "webWorkerTsConfig": "tsconfig.worker.json",
+
