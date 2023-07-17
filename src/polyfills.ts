@@ -57,14 +57,14 @@
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
-import 'zone.js';  // Included with Angular CLI.
+import 'zone.js'; // Included with Angular CLI.
 (window as any).global = window;
 
-(window as any).global.Buffer = (window as any).global.Buffer || require('buffer').Buffer;
-
+(window as any).global.Buffer =
+  (window as any).global.Buffer || require('buffer').Buffer;
 
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
- import '/home/mesut/Workspace/adamxyz/node_modules/event-source-polyfill/src/eventsource.min.js';
- import 'zone.js/dist/zone-patch-user-media';
+import 'event';
+import 'zone.js/dist/zone-patch-user-media';
