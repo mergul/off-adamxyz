@@ -15,6 +15,14 @@ export class BackendServiceService {
       }
     );
   }
+  closeOffer(offerId: string): Observable<boolean> {
+    return this.httpClient.get<boolean>(
+      '/api/rest/news/closeOffer/' + offerId,
+      {
+        responseType: 'json',
+      }
+    );
+  }
   getOffer(offerId: any) {
     return this.httpClient.get<Offer>('/api/rest/news/getOffer/' + offerId, {
       responseType: 'json',

@@ -42,6 +42,11 @@ export class OfferPostDetailsComponent implements OnInit, AfterViewInit {
       .completeOffer(this._offer.newsId, this._offer.id)
       .subscribe((x) => this.dialogRef.close());
   }
+  closeOffer() {
+    this.backendService
+      .closeOffer(this._offer.id)
+      .subscribe((x) => this.dialogRef.close());
+  }
   closeModal() {
     this.dialogRef.close();
   }

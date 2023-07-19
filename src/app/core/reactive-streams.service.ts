@@ -478,7 +478,7 @@ export class ReactiveStreamsService {
   };
   listenIt = (isMe, isOther, isTags, isPeople, event: any) => {
     if (isMe) {
-      this.addToSubject(this.getNewsSubject('me'), event);
+      this.addToSubjectSingle(this.getNewsSubject('me'), event);
       this.meLıstenerStartFn();
     } else if (isOther) {
       this.addToSubject(this.getNewsSubject('other'), event);
@@ -498,6 +498,9 @@ export class ReactiveStreamsService {
         event.type.split('-')[2].substring(1),
         this.publicBehaviorSubject.getValue()
       );
+      event.lastEventId === 'person'
+        ? this.addToSubjectSingle(this.followedPeopleSubject, event)
+        : this.addToSubjectSingle(this.followedTagsSubject, event);
     }
   };
   addToSubject = (subj: BehaviorSubject<NewsPayload[]>, event: any) => {
