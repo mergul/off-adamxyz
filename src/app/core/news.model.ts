@@ -103,6 +103,10 @@ export class NewsPayload {
     this._offers = value;
   }
 }
+export interface IdWrapper {
+  id: string;
+}
+
 export interface News {
   id: string;
   ownerId: string;

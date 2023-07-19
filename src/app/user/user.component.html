@@ -56,14 +56,14 @@
             <div *ngIf="location.path().startsWith('/users/')" style="text-align: center; padding-top: 10px">
                 <button class="followee" (click)="tagClick(loggedUser.id)">Takip Et</button>
             </div>
-            <div *ngIf="location.path().startsWith('/user/edit')" style="text-align: center; padding-top: 20px">
+            <!-- <div *ngIf="location.path().startsWith('/user/edit')" style="text-align: center; padding-top: 20px">
                 <button class="butto ripple button-outline" (click)="accountHistory()">Hesap Özeti</button>
-            </div>
+            </div> -->
             <div *ngIf="location.path() ==='/user'" style="text-align: center; padding-top: 10px">
                 <button class="butto ripple button-outline" (click)="btnClick()">Edit Profile
                 </button>
             </div>
-            <div *ngIf="location.path().startsWith('/user/edit')&&userService.dbUser&&userService.dbUser.roles.includes('ROLE_ADMIN')"
+            <!-- <div *ngIf="location.path().startsWith('/user/edit')&&userService.dbUser&&userService.dbUser.roles.includes('ROLE_ADMIN')"
                 style="text-align: center; padding-top: 10px">
                 <button class="butto ripple button-outline" (click)="moneyManage()">Para Aktar</button>
             </div>
@@ -73,7 +73,7 @@
             </div>
             <div *ngIf="location.path().startsWith('/user/edit')" style="text-align: center; padding-top: 10px">
                 <button class="butto ripple button-outline" (click)="deleteClick()">Hesabımı Sil</button>
-            </div>
+            </div> -->
         </div>
     </section>
     <section class="center">

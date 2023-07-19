@@ -222,6 +222,13 @@ export class NewsDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
       autoFocus: false,
       data: { newsId: this.news$.id, newsOwnerId: this.news$.ownerId },
     });
+    this.maCurrentDialog
+      .afterClosed()
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe((id) => {
+        this.news$.offers.push(id);
+        console.log('maCurrentDialog at closing of OfferComponent id : ', id);
+      });
   }
   sliderNext() {
     if (this.sliderSlide + 1 === this.news$.mediaReviews.length) {

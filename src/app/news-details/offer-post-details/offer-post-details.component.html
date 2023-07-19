@@ -2,6 +2,7 @@
     <app-carousel [myMediaReviews]="this._offer.mediaReviews"></app-carousel>
     <article>
         <h1>{{this._offer.topic}}</h1>
+        <p>Offer ID : {{this._offer.id}}</p>
         <p>Price: {{this._offer.price}}</p>
         <p [innerHTML]="this._offer.summary | sanitizeHtml"></p>
 

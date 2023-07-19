@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { News, NewsFeed, Offer, OfferFeed, OfferPayload } from './news.model';
+import {
+  IdWrapper,
+  News,
+  NewsFeed,
+  Offer,
+  OfferFeed,
+  OfferPayload,
+} from './news.model';
 
 @Injectable({
   providedIn: 'root',
@@ -49,8 +56,8 @@ export class BackendServiceService {
       responseType: 'json',
     });
   }
-  postOffer(offerFeed: OfferFeed): Observable<boolean> {
-    return this.httpClient.post<boolean>('/api/rest/news/offers', offerFeed, {
+  postOffer(offerFeed: OfferFeed): Observable<IdWrapper> {
+    return this.httpClient.post<IdWrapper>('/api/rest/news/offers', offerFeed, {
       responseType: 'json',
     });
   }

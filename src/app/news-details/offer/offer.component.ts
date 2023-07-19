@@ -14,7 +14,7 @@ import { BackendServiceService } from 'src/app/core/backend-service.service';
 import { Observable, Subject } from 'rxjs';
 import { OfferFeed } from 'src/app/core/news.model';
 import { DOCUMENT } from '@angular/common';
-import { takeUntil } from 'rxjs/operators';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { MultiFilesService } from 'src/app/multi-files-upload/multi-files.service';
 import { WindowRef } from 'src/app/core/window.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -420,15 +420,15 @@ export class OfferComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.backendService
       .postOffer(this.offerFeed)
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe((val) => {
-        console.log('Multi success --> ', val);
-        //  this.userService.increaseCount().pipe(takeUntil(this.onDestroy)).subscribe(value1 => {
-        this.removeAll();
-        this.dialogRef.close();
-
-        // });
-      });
+      .pipe(
+        takeUntil(this.onDestroy),
+        map((val) => {
+          console.log('Multi success --> ', val.id);
+          this.removeAll();
+          this.dialogRef.close(val.id);
+        })
+      )
+      .subscribe();
   }
 
   text2HTML(text: string) {
