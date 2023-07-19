@@ -398,7 +398,7 @@ export class PublicProfileComponent
     this.boolUser = of(8);
   }
   getContentsCount(userd: User) {
-    return this.reactiveService.publicStreamList$.get(userd.id)?.length;
+    return this.reactiveService.getNewsSubject('other').value.length; //publicStreamList$.get(userd.id)?.length;
   }
   getPeopleOffers(): number {
     return this.reactiveService.getOffersSubject('other').value.length;
