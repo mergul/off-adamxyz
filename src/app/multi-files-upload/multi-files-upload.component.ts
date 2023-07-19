@@ -599,7 +599,7 @@ export class MultiFilesUploadComponent
     if (formValue.news_topic)
       this._purl = formValue.news_topic.match(/#[a-zığüşöçĞÜŞÖÇİ0-9_.]+/gi);
     this.newsFeed = new NewsFeed(
-      this.text2HTML(formValue.news_description),
+      this.stringToHtml(formValue.news_description),
       formValue.news_topic,
       this._purl != null ? this._purl : [],
       AllFilesObj,
@@ -644,7 +644,51 @@ export class MultiFilesUploadComponent
       return text1;
     }
   }
+  stringToHtml(text: string) {
+    let text_input = text.trim();
+    let output_html = '';
+    let counter = 0;
+    output_html += '<p>'; //begin by creating paragraph
+    for (counter = 0; counter < text_input.length; counter++) {
+      switch (text_input[counter]) {
+        case '\n':
+          if (text_input[counter + 1] === '\n') {
+            output_html += '</p>\n<p>';
+            counter++;
+          } else output_html += '<br>';
+          break;
 
+        case ' ':
+          if (text_input[counter - 1] != ' ' && text_input[counter - 1] != '\t')
+            output_html += ' ';
+          break;
+
+        case '\t':
+          if (text_input[counter - 1] != '\t') output_html += ' ';
+          break;
+
+        case '&':
+          output_html += '&amp;';
+          break;
+
+        case '"':
+          output_html += '&quot;';
+          break;
+
+        case '>':
+          output_html += '&gt;';
+          break;
+
+        case '<':
+          output_html += '&lt;';
+          break;
+
+        default:
+          output_html += text_input[counter];
+      }
+    }
+    return output_html;
+  }
   ngAfterViewInit() {
     this.renderer.setStyle(
       this.document.querySelector('.mat-dialog-container'),
