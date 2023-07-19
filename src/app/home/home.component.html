@@ -1,6 +1,6 @@
 <div class="newst" #dataContainer appScroll (onScroll)="track($event)">
     <div *ngIf="activeLink!=null&&(activeLink.charAt(0)=='@'|| activeLink.charAt(0)=='#')"
-        style="/*text-align: center;*/margin-left: 29%; padding-top: 17px;">
+        style="/*text-align: center;*/margin: 0 29%; padding-top: 17px;">
         <app-edit-tags-list [tags]="getLink(activeLink)" [booled]="true" [isPub]="isPub"></app-edit-tags-list>
     </div>
     <div class="newsm">
