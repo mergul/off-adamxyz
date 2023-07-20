@@ -687,7 +687,7 @@ export class MultiFilesUploadComponent
           output_html += text_input[counter];
       }
     }
-    return output_html;
+    return output_html + '</p>';
   }
   ngAfterViewInit() {
     this.renderer.setStyle(
