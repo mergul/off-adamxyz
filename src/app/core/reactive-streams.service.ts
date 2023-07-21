@@ -287,7 +287,7 @@ export class ReactiveStreamsService {
     if (isMe) {
       this.addOfferSubject(this.getOffersSubject('me'), event);
     } else if (isOther) {
-      this.addOfferSubject(this.getOffersSubject('my'), event);
+      this.addToSubjectOffer(this.getOffersSubject('my'), event);
     } else if (event.lastEventId === 'people' || event.lastEventId === 'tags') {
       this.addToSubjectOffer(this.getOffersSubject(event.lastEventId), event);
     } else if (event.lastEventId === 'my') {
