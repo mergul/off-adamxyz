@@ -48,6 +48,7 @@ export class NewsListComponent implements OnInit, OnDestroy, AfterViewInit {
   private _percentage: number = 0;
   public _myWidth!: string;
   _isMiddle = false;
+  innerWidth!: number;
 
   constructor(
     private newsService: NewsService,
@@ -55,11 +56,11 @@ export class NewsListComponent implements OnInit, OnDestroy, AfterViewInit {
     private renderer: Renderer2,
     private winRef: WindowRef
   ) {
+    this.innerWidth = winRef.nativeWindow.innerWidth;
     this._height = (winRef.nativeWindow.innerHeight * 136) / 780;
     this._isMiddle =
-      (winRef.nativeWindow.innerWidth >= 601 &&
-        winRef.nativeWindow.innerWidth <= 800) ||
-      winRef.nativeWindow.innerWidth <= 400;
+      (this.innerWidth >= 601 && this.innerWidth <= 800) ||
+      this.innerWidth <= 400;
   }
   ngAfterViewInit(): void {
     if (
@@ -72,7 +73,8 @@ export class NewsListComponent implements OnInit, OnDestroy, AfterViewInit {
       this.winRef.nativeWindow.document
         .querySelectorAll('.news-list')
         .forEach((item) => {
-          if (item.offsetLeft == ind * 617) item.classList.add('shadow');
+          if (item.offsetLeft == ind * this.innerWidth)
+            item.classList.add('shadow');
           else item.classList.remove('shadow');
         });
     }
@@ -218,7 +220,7 @@ export class NewsListComponent implements OnInit, OnDestroy, AfterViewInit {
                     this.winRef.nativeWindow.document
                       .querySelectorAll('.news-list')
                       .forEach((item, indx) => {
-                        if (item.offsetLeft == ind * 617)
+                        if (item.offsetLeft == ind * this.innerWidth)
                           item.classList.add('shadow');
                       });
                   }
@@ -231,7 +233,7 @@ export class NewsListComponent implements OnInit, OnDestroy, AfterViewInit {
                     this.winRef.nativeWindow.document
                       .querySelectorAll('.news-list')
                       .forEach((item, indx) => {
-                        if (item.offsetLeft == ind * 617) {
+                        if (item.offsetLeft == ind * this.innerWidth) {
                           item.classList.remove('shadow');
                         }
                       });
@@ -243,7 +245,7 @@ export class NewsListComponent implements OnInit, OnDestroy, AfterViewInit {
               this.winRef.nativeWindow.document
                 .querySelectorAll('.news-list')
                 .forEach((item) => {
-                  if (item.offsetLeft == ind * 617)
+                  if (item.offsetLeft == ind * this.innerWidth)
                     item.classList.add('shadow');
                   else item.classList.remove('shadow');
                 });

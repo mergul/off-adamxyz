@@ -78,8 +78,7 @@
     </section>
     <section class="center">
         <app-profile-center *ngIf="loggedUser" [username]="loggedUser.email" [boolUser]="boolUser"
-            [user]="userService.dbUser" [userIds]="_userIds" [tagz]="tags" [isPub]="_isPub"
-            [ngStyle]="compStyle"></app-profile-center>
+            [user]="userService.dbUser" [userIds]="_userIds" [tagz]="tags" [isPub]="_isPub"></app-profile-center>
         <router-outlet></router-outlet>
     </section>
 </main>

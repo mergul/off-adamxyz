@@ -113,7 +113,15 @@ export class ProfileCenterComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const wid = this.winRef.nativeWindow.innerWidth;
-    const wew = wid >= 908 ? 808 : wid - (100 * wid) / 908;
+    // const wew = wid >= 908 ? 808 : wid - (100 * wid) / 908;
+    const wew =
+      wid > 1240
+        ? wid / 2
+        : wid < 601
+        ? wid
+        : wid < 618 + 310
+        ? wid - 310
+        : 617;
     this.modalWidth = '' + wew;
     if (!this.reactiveService.statusOfNewsSource()) {
       this.reactiveService.getNewsStream(

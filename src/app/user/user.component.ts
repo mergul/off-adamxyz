@@ -25,7 +25,7 @@ import { switchMap, takeUntil } from 'rxjs/operators';
 })
 export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
   private readonly onDestroy = new Subject<void>();
-  listStyle = {};
+  // listStyle = {};
   compStyle = {};
   user: FirebaseUserModel = new FirebaseUserModel();
   _newsCounts: Map<string, string> = new Map<string, string>();
@@ -115,28 +115,28 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
     let rght;
     let lft;
     this.isMobile = this.winRef.nativeWindow.innerWidth < 620;
-    if (this.isMobile) {
-      lft = myWis > 390 ? (myWis - 390) / 2 : myWis / 20;
-      rght = myWis > 390 ? (3 * myWis) / 350 : myWis / 20;
-    } else {
-      rght = (3 * myWis) / 350;
-    }
-    const mwidth = 62;
-    this.listStyle = {
-      minWidth: this.isMobile ? `auto` : `390px`,
-      marginRight: `${rght}px`,
-      marginLeft: `${lft}px`,
-    };
-    this.compStyle = {
-      width:
-        myWis > 1050
-          ? `${(((myWis * 2) / 3) * myWis) / 1600}px`
-          : !this.isMobile
-          ? `${mwidth}vw`
-          : '100vw',
-      overflow: 'hidden',
-      marginTop: '17px',
-    };
+    // if (this.isMobile) {
+    //   lft = myWis > 390 ? (myWis - 390) / 2 : myWis / 20;
+    //   rght = myWis > 390 ? (3 * myWis) / 350 : myWis / 20;
+    // } else {
+    //   rght = (3 * myWis) / 350;
+    // }
+    // const mwidth = 62;
+    // this.listStyle = {
+    //   minWidth: this.isMobile ? `auto` : `390px`,
+    //   marginRight: `${rght}px`,
+    //   marginLeft: `${lft}px`,
+    // };
+    // this.compStyle = {
+    //   width:
+    //     myWis > 1050
+    //       ? `${(((myWis * 2) / 3) * myWis) / 1600}px`
+    //       : !this.isMobile
+    //       ? `${mwidth}vw`
+    //       : '100vw',
+    //   overflow: 'hidden',
+    //   marginTop: '17px',
+    // };
   }
   ngAfterViewInit(): void {}
 

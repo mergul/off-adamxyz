@@ -83,6 +83,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private winRef: WindowRef,
     private renderer: Renderer2
   ) {
+    const wid = this.winRef.nativeWindow.innerWidth;
+    this.itemWidth = wid > 1240 ? wid / 2 : wid < 618 ? wid : 617;
     if (this.newsService.callToggle.observers.length === 0) {
       this.newsService.callToggle
         .pipe(takeUntil(this.destroy$))

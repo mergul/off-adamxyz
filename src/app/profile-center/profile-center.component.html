@@ -9,7 +9,7 @@
     <span style="font-size: large;vertical-align: super;">Sıralama</span>
   </button>
   <app-news-list [newsList]="_newsList" [percentage]="percentage" [activeLink]="service.activeLink"
-    [currLink]="service.activeLink" [myWidth]="this.modalWidth"></app-news-list>
+    [currLink]="service.activeLink" [iWidth]="this.modalWidth"></app-news-list>
   <div (click)="moveTop()" class="scroll-to-top" *ngIf="percentage>50">
   </div>
 </div>
