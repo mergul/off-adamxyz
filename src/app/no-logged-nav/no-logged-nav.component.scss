@@ -15,18 +15,19 @@
   color: #fff;
 }
 
-span.mat-button-wrapper {
-  ::before,
-  ::after {
-    height: 55px;
-  }
+span {
+  place-items: center;
+  height: 60px;
+}
+mat-icon {
+  display: inline-table !important;
 }
 .mat-icon-button,
 .mat-icon {
   width: 33%;
   height: 55px;
-  line-height: 66px !important;
-  font-size: inherit;
+  line-height: 55px !important;
+  // font-size: inherit;
   border: none;
   cursor: pointer;
   border-radius: 0 !important;
@@ -45,6 +46,10 @@ span.mat-button-wrapper {
 .navbar {
   background-color: darkmagenta;
   flex: 1.5 1 0;
+  height: 55px;
+}
+#logos {
+  display: flex;
 }
 #hologo {
   margin-left: 0%;
@@ -123,6 +128,10 @@ span.mat-button-wrapper {
 }
 .navbar > button {
   transition: all 0.2s ease-in-out;
+  div {
+    height: 55px;
+    align-items: center;
+  }
 }
 #hesp {
   height: max-content;

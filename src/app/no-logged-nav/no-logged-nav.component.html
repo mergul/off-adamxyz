@@ -3,7 +3,7 @@
     <button (click)="btnClick('/home')" id="mologo" class="mat-icon-button" aria-label="Left Align">
       <div style="height: 66px;display: -webkit-box;width: 100%;justify-content: space-evenly;">
         <div class="image"></div>
-        <span>Adam</span>
+        <span id="logos">Adam</span>
       </div>
     </button>
     <!-- <div>
@@ -25,21 +25,23 @@
     <button #buttons mat-icon-button [matTooltip]="this.newsService.links[0]"
       (click)="navClick(this.newsService.links[0])" class="active mat-icon-button" aria-label="Center Align" autofocus>
       <div [style.display]="this.winRef.nativeWindow.innerWidth > 800?'flex':'block'">
-        <mat-icon>home</mat-icon><span
-          [style.display]="this.winRef.nativeWindow.innerWidth > 800?'block':'none'">home</span>
+        <mat-icon>home</mat-icon>
+        <span [style.display]="this.winRef.nativeWindow.innerWidth > 800?'flex':'none'">home</span>
       </div>
     </button>
     <button #buttons mat-icon-button [matTooltip]="this.newsService.links[1]"
       (click)="navClick(this.newsService.links[1])" class="mat-icon-button"
       style="border-left: 1px solid #6d6d6d;border-right: 1px solid #6d6d6d;" aria-label="Center Align" autofocus>
-      <div [style.display]="this.winRef.nativeWindow.innerWidth > 800?'flex':'block'"><mat-icon>filter</mat-icon><span
-          [style.display]="this.winRef.nativeWindow.innerWidth > 800 ?'block':'none'">tags</span>
+      <div [style.display]="this.winRef.nativeWindow.innerWidth > 800?'flex':'block'">
+        <mat-icon>filter</mat-icon>
+        <span [style.display]="this.winRef.nativeWindow.innerWidth > 800 ?'flex':'none'">tags</span>
       </div>
     </button>
     <button #buttons mat-icon-button [matTooltip]="this.newsService.links[2]"
       (click)="navClick(this.newsService.links[2])" class="mat-icon-button" aria-label="Center Align" autofocus>
-      <div [style.display]="this.winRef.nativeWindow.innerWidth > 800?'flex':'block'"><mat-icon>people</mat-icon><span
-          [style.display]="this.winRef.nativeWindow.innerWidth > 800?'block':'none'">people</span>
+      <div [style.display]="this.winRef.nativeWindow.innerWidth > 800?'flex':'block'">
+        <mat-icon>people</mat-icon>
+        <span [style.display]="this.winRef.nativeWindow.innerWidth > 800?'flex':'none'">people</span>
       </div>
     </button>
   </div>
