@@ -566,7 +566,33 @@ export class ReactiveStreamsService {
         .filter((nh) => !nh.tags.includes(id));
       this.followedTagsSubject.next(tj);
     }
+    this.handleOffers(id, isMe);
   }
+  handleOffers(id: string, isMe = false) {
+    this.newsEventSource.removeEventListener(
+      'top-offers-' + '@' + id + '-' + this.random,
+      this.meOffListener,
+      true
+    );
+    this.newsEventSource.removeEventListener(
+      'top-offers-' + '@' + id,
+      this.meOffListener,
+      true
+    );
+    this.meOfferSubject.next([]);
+    this.newsEventSource.removeEventListener(
+      'top-offers-' + '@' + id + '-' + this.random,
+      this.myOffListener,
+      true
+    );
+    this.newsEventSource.removeEventListener(
+      'top-offers-' + '@' + id,
+      this.myOffListener,
+      true
+    );
+    this.myOfferSubject.next([]);
+  }
+
   setUserListListeners(id: string) {
     const myB = this.topNewsList.get('top-news-' + id);
     if (myB) myB.push('follow');
@@ -668,6 +694,11 @@ export class ReactiveStreamsService {
     }
     this.newsEventSource.addEventListener(
       'top-offers-' + '@' + id + '-' + this.random,
+      this.thyOffListener,
+      true
+    );
+    this.newsEventSource.addEventListener(
+      'top-offers-' + '@' + id,
       this.thyOffListener,
       true
     );
