@@ -52,7 +52,13 @@ export class ProfileCenterComponent implements OnInit, OnDestroy {
       this.reactiveService.random +
       '/subscribeMessages';
   }
-
+  getId(): string {
+    return !this._isPublic && this._user
+      ? this._user.id
+      : this.userService.loggedUser
+      ? this.userService.loggedUser.id
+      : '';
+  }
   @Input()
   get user(): User | undefined {
     return this._user;

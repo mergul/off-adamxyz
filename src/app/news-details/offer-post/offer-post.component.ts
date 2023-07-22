@@ -19,6 +19,7 @@ export class OfferPostComponent implements OnInit {
   private _offer!: OfferPayload;
   maNextDialog!: MatDialogRef<OfferPostDetailsComponent, any>;
   public _width!: string;
+  _loggedId!: string;
   // myNextDialog!: MatDialogRef<CarouselComponent, any>;
 
   constructor(
@@ -45,6 +46,15 @@ export class OfferPostComponent implements OnInit {
   set myWidth(width: string) {
     this._width = width;
   }
+
+  @Input()
+  get loggedId() {
+    return this._loggedId;
+  }
+
+  set loggedId(loggedId: string) {
+    this._loggedId = loggedId;
+  }
   offerDetails() {
     this.backendService
       .getOffer(this._offer.id)
@@ -55,7 +65,11 @@ export class OfferPostComponent implements OnInit {
         matDialogConfig.maxWidth = this._width + 'px';
         matDialogConfig.autoFocus = false;
         matDialogConfig.id = '4';
-        matDialogConfig.data = { offer: x, width: this._width };
+        matDialogConfig.data = {
+          offer: x,
+          width: this._width,
+          loggedId: this._loggedId,
+        };
         this.maNextDialog = this.modalService.open(
           OfferPostDetailsComponent,
           matDialogConfig

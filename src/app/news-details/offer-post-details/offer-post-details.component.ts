@@ -12,6 +12,7 @@ export class OfferPostDetailsComponent implements OnInit, AfterViewInit {
   public _offer!: Offer;
   private _myOffer!: Offer;
   _width!: number;
+  _loggedId!: string;
   constructor(
     public dialogRef: MatDialogRef<OfferPostDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -20,6 +21,7 @@ export class OfferPostDetailsComponent implements OnInit, AfterViewInit {
     if (data && data.offer) {
       this._offer = data.offer;
       this._width = +data.width;
+      this._loggedId = data.loggedId;
     }
   }
 
@@ -35,6 +37,14 @@ export class OfferPostDetailsComponent implements OnInit, AfterViewInit {
 
   set myOffer(value: Offer) {
     this._myOffer = value;
+  }
+  @Input()
+  get loggedId() {
+    return this._loggedId;
+  }
+
+  set loggedId(loggedId: string) {
+    this._loggedId = loggedId;
   }
   ngAfterViewInit() {}
   acceptOffer() {

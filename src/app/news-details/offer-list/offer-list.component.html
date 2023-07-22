@@ -1,7 +1,8 @@
 <div class="news">
     <ul class="items">
         <li #newsSum *ngFor="let offer of this.offerList | async;trackBy: byId" class="news-list shadow">
-            <app-offer-post [offer]="offer" [myWidth]="this._myWidth" [style.width.px]="this._myWidth"
+            <app-offer-post [offer]="offer" [loggedId]="_loggedId" [myWidth]="this._myWidth"
+                [style.width.px]="this._myWidth"
                 [ngStyle]="{ 'background': offer.active?'palegreen':'palevioletred'}"></app-offer-post>
         </li>
     </ul>

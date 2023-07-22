@@ -119,13 +119,29 @@ export class PostComponent implements OnInit, OnDestroy {
       this.router
         .navigateByUrl(this.newsService.preModalUrl, {
           skipLocationChange: true,
+          state: {
+            loggedID: this.userService.loggedUser
+              ? this.userService.loggedUser.id
+              : '',
+          },
         })
         .then(() => {
-          this.router.navigate([url]);
+          this.router.navigate([url], {
+            state: {
+              loggedID: this.userService.loggedUser
+                ? this.userService.loggedUser.id
+                : '',
+            },
+          });
         });
     else
       this.router.navigate(['news-details/' + this._news.newsId], {
         relativeTo: this.route.parent,
+        state: {
+          loggedID: this.userService.loggedUser
+            ? this.userService.loggedUser.id
+            : '',
+        },
       });
   }
   get newsCounts(): Map<string, string> {

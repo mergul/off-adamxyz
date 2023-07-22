@@ -17,9 +17,9 @@
 <app-profile-list *ngIf="(boolUser|async) === 2" [users]="users" [booled]="(boolUser|async) === 2"></app-profile-list>
 <app-edit-tags-list *ngIf="(boolUser|async) === 3" [tags]="tagz" [booled]="(boolUser|async) === 3"
   [isPub]="isPub"></app-edit-tags-list>
-<app-offer-list *ngIf="(boolUser|async) === 7" [urlis]="this.service.meOfferList$"
+<app-offer-list *ngIf="(boolUser|async) === 7" [loggedId]="getId()" [urlis]="this.service.meOfferList$"
   [myWidth]="this.modalWidth"></app-offer-list>
-<app-offer-list *ngIf="(boolUser|async) === 8"
+<app-offer-list *ngIf="(boolUser|async) === 8" [loggedId]="getId()"
   [urlis]="_isPublic?this.service.othersOfferList$:this.service.myOfferList$"
   [myWidth]="this.modalWidth"></app-offer-list>
 <app-account-history *ngIf="(boolUser|async) === 4" [booled]="(boolUser|async) === 4"></app-account-history>

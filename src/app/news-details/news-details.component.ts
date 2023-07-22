@@ -209,6 +209,7 @@ export class NewsDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
       ids: this.news$.offers.filter((val) => val !== ''),
       width: this.data.header$,
       maxWidth: this.data.header$,
+      loggedId: this.loggedID,
     };
 
     this.maListDialog = this.modalService.open(
