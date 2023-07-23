@@ -72,40 +72,31 @@ export class EditTagsListComponent implements OnInit, OnDestroy {
     return !this.service.dbUser;
   }
   checkTag(tag: string) {
-    let res = this.service.newsCo.get(this.service.links[1])?.includes(tag);
-    console.log(
-      'logsez= ',
-      res,
-      this.service.newsCo.get(this.service.links[1]),
-      tag
-    );
-    return res;
+    return this.service.newsCo.get(this.service.links[1])?.includes(tag);
   }
-  removeTag(tag: string, i: number) {
+  removeTag(tag: string, index: number) {
     this.service
       .manageFollowingTag('#' + tag, false)
       .pipe(takeUntil(this.onDestroy))
       .subscribe((value) => {
-        if (this.service.dbUser) {
-          // this.service.dbUser.tags.splice(index, 1);
-          this.service.newsCo.get(this.service.links[1])?.splice(i, 1);
-          this.renderer.setProperty(
-            this.followButtons.toArray()[i].nativeElement,
-            'innerHTML',
-            'Takip Et'
-          );
-        }
+        // this.service.dbUser.tags.splice(index, 1);
+        this.service.newsCo.get(this.service.links[1])?.splice(index, 1);
+        this.renderer.setProperty(
+          this.followButtons.toArray()[index].nativeElement,
+          'innerHTML',
+          'Takip Et'
+        );
       });
   }
-  addTag(tag: string, i: number) {
+  addTag(tag: string, index: number) {
     this.service
       .manageFollowingTag('#' + tag, true)
       .pipe(takeUntil(this.onDestroy))
       .subscribe((value) => {
         // this.service.dbUser?.tags.push(tag);
-        this.service.newsCo.get(this.service.links[1])?.push(tag);
+        this.service.newsCo.get(this.service.links[1])?.push('#' + tag);
         this.renderer.setProperty(
-          this.followButtons.toArray()[i].nativeElement,
+          this.followButtons.toArray()[index].nativeElement,
           'innerHTML',
           'Takibi Kes'
         );

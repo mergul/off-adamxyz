@@ -113,6 +113,8 @@ export class LoggedNavComponent implements OnInit, OnDestroy {
               this.reactiveService.resetUserListListeners('@' + tag, true);
             }
           }
+          if (this.service.dbUser)
+            this.reactiveService.handleOffers(this.service.dbUser.id, true);
           this.service.dbUser = undefined;
           this.service.newsCo.clear();
           this.newsService.activeLink = this.newsService.links[0];

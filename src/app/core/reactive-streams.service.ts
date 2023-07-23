@@ -566,7 +566,6 @@ export class ReactiveStreamsService {
         .filter((nh) => !nh.tags.includes(id));
       this.followedTagsSubject.next(tj);
     }
-    this.handleOffers(id, isMe);
   }
   handleOffers(id: string, isMe = false) {
     this.newsEventSource.removeEventListener(

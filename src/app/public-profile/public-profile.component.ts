@@ -173,7 +173,7 @@ export class PublicProfileComponent
           this.folli = value;
           if (this.userService.dbUser) {
             user.followers.push(this.userService.dbUser.id);
-            this.userService.dbUser.users.push(user.id);
+            // this.userService.dbUser.users.push(user.id);
             this.userService.newsCo
               .get(this.userService.links[2])
               ?.push('@' + user.id);
@@ -189,10 +189,10 @@ export class PublicProfileComponent
           if (this.userService.dbUser) {
             const ind = user.followers.indexOf(this.userService.dbUser.id);
             user.followers.splice(ind, 1);
-            this.userService.dbUser.users.splice(
-              this.userService.dbUser.users.indexOf(user.id),
-              1
-            );
+            // this.userService.dbUser.users.splice(
+            //   this.userService.dbUser.users.indexOf(user.id),
+            //   1
+            // );
             this.userService.newsCo
               .get(this.userService.links[2])
               ?.splice(ind, 1);

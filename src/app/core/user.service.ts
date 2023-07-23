@@ -162,7 +162,21 @@ export class UserService implements OnDestroy {
               withCredentials: true,
             }
           )
-          .pipe();
+          .pipe(
+            map((vvc) => {
+              if (this.dbUser && _activeLink.charAt(0) === '@') {
+                let users = this.dbUser.users;
+                users.push(_activeLink.substring(1));
+                this.dbUser.users = users;
+              } else if (this.dbUser && _activeLink.charAt(0) === '#') {
+                let tags = this.dbUser.tags;
+                tags.push(_activeLink.substring(1));
+                this.dbUser.tags = tags;
+              }
+              console.log('manageFollowingTag: ', this.dbUser);
+              return vvc;
+            })
+          );
       } else {
         this.reactiveService.resetUserListListeners(_activeLink);
         return this.http
@@ -170,7 +184,23 @@ export class UserService implements OnDestroy {
             responseType: 'json',
             withCredentials: true,
           })
-          .pipe();
+          .pipe(
+            map((vvc) => {
+              if (this.dbUser && _activeLink.charAt(0) === '@') {
+                let users = this.dbUser.users;
+                let index = users.indexOf(_activeLink.substring(1));
+                users.splice(index, 1);
+                this.dbUser.users = users;
+              } else if (this.dbUser && _activeLink.charAt(0) === '#') {
+                let tags = this.dbUser.tags;
+                let index = tags.indexOf(_activeLink.substring(1));
+                tags.splice(index, 1);
+                this.dbUser.tags = tags;
+              }
+              console.log('manageFollowingTag: ', this.dbUser);
+              return vvc;
+            })
+          );
       }
     } else {
       if (_activeLink.charAt(0) === '@') {

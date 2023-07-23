@@ -124,7 +124,7 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.onDestroy))
         .subscribe((value) => {
           this.folli = value;
-          this.userService.dbUser?.users.push(this._user.id);
+          // this.userService.dbUser?.users.push(this._user.id);
           this.userService.newsCo
             .get(this.userService.links[2])
             ?.push('@' + this._user.id);
@@ -143,7 +143,7 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
           const ind = this.userService.dbUser?.users.indexOf(this._user.id);
           console.log('prof ind: ', ind);
           if (ind !== undefined) {
-            this.userService.dbUser?.users.splice(ind, 1);
+            // this.userService.dbUser?.users.splice(ind, 1);
             this.userService.newsCo
               .get(this.userService.links[2])
               ?.splice(ind, 1);

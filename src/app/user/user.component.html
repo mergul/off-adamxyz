@@ -31,12 +31,13 @@
             <label style="margin: 5px 0;">Görüntüleme: <span style="float: right">{{newsCounts.get('@' +
                     loggedUser.id)}}</span></label>
             <br>
-            <button class="followee" (click)="proClick(loggedUser.users)">Takip Edilen Kişiler <span
-                    style="float: right">{{loggedUser.users ? loggedUser.users.length : 0}}</span>
+            <button class="followee" (click)="followPeople(false)">Takip Edilen Kişiler
+                <span style="float: right">{{this.userService.newsCo.get(this.userService.links[2])?.length}}</span>
             </button>
             <br>
             <button (click)="followTags()" class="followee">Takip
-                Edilen Etiketler <span style="float: right">{{loggedUser.tags ? loggedUser.tags.length : 0}}</span>
+                Edilen Etiketler <span
+                    style="float: right">{{this.userService.newsCo.get(this.userService.links[1])?.length}}</span>
             </button>
             <br>
             <button (click)="myOffers()" class="followee">Yapılan Teklifler <span
@@ -49,7 +50,7 @@
                     }}</span>
             </button>
             <br>
-            <button class="followee" (click)="proClick(loggedUser.followers)">Takipçiler <span
+            <button class="followee" (click)="followPeople(true)">Takipçiler <span
                     style="float: right">{{loggedUser.followers ? loggedUser.followers.length : 0}}</span>
             </button>
             <br>

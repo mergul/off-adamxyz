@@ -107,7 +107,7 @@ export class NoLoggedNavComponent implements OnInit, OnDestroy {
   }
   receiveMessage($event) {
     this._loggedinUser = $event;
-    console.log('receiveMessage --> ' + $event);
+    console.log('receiveMessage --> ' + JSON.stringify($event));
   }
 
   onMenu() {

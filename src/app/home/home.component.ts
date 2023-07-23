@@ -335,7 +335,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         .pipe(takeUntil(this.destroy$))
         .subscribe((value) => {
           if (value) {
-            this.service.dbUser?.tags.push(_activeLink.substring(1));
+            // this.service.dbUser?.tags.push(_activeLink.substring(1));
             this.service.newsCo.get(this.links[1])?.push(_activeLink);
           }
         });

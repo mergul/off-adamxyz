@@ -176,9 +176,13 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
     this.boolUser = of(1);
     return this.router.navigateByUrl(url);
   }
-  proClick(people: string[]) {
+  followPeople(isFollower: boolean) {
     this.renderer.removeClass(this.myInput.nativeElement, 'active');
-    this._userIds = people;
+    this._userIds = isFollower
+      ? this.loggedUser?.followers || []
+      : this.userService.newsCo
+          .get(this.userService.links[2])
+          ?.map((xc) => xc.substring(1)) || [];
     this.boolUser = of(2);
   }
 
@@ -195,9 +199,11 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   followTags() {
-    if (this.loggedUser) {
-      this.tags = of(this.loggedUser.tags);
-    }
+    this.tags = of(
+      this.userService.newsCo
+        .get(this.userService.links[1])
+        ?.map((xc) => xc.substring(1)) || []
+    );
     this.boolUser = of(3);
     this.renderer.removeClass(this.myInput.nativeElement, 'active');
   }
