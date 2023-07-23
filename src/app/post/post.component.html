@@ -1,31 +1,12 @@
-<!-- <mat-card class="example-card" (click)="navigate()">
-  <mat-card-header style="display: flex;">
-  </mat-card-header>
-  <mat-card-content style="display: flex;">
-    <app-files-list [thumbName]="'thumb-kapak-' + (news.thumb ? news.thumb : 'bae.jpeg')"
-      style="margin-top: 0px;"></app-files-list>
-    <div class="malink" style="padding-left: 10px; width: auto;">
-      <h4 class="mahead">
-        <span class='date'>{{news.date | date:'medium'}}</span>
-        <br>
-        <span class="text" *ngIf="news.topic.charAt(0)!=='#'">{{news.topic.split('#')[0]}}</span>
-        <span class="text" *ngFor="let tag of news.topics; let i = index">
-          <a class="tag" (click)="onTagClick(tag);$event.stopPropagation();$event.preventDefault()"
-            style="font-weight: 600;color: #641b7b"> {{tag}} </a>
-          {{news.topic.split('#')[i + 1].replace(news.topics[i].substring(1), '')}}
-        </span>
-      </h4>
-    </div>
-  </mat-card-content>
-  <mat-card-actions>
-  </mat-card-actions>
-</mat-card> -->
-
-<a (click)="navigate()" [style.width.px]="this._width" [style.height]="!this._isMiddle?this._height+'px':'auto'">
+<article (click)="navigate()" [style.width.px]="this._width" [style.height]="!this._isMiddle?this._height+'px':'auto'">
   <section class="fi">
     <figure class="figure">
-      <img class="figure-img" [src]="'assets/thumb-kapak-' + (news.thumb ? news.thumb : 'bae.jpeg')" width="250px"
-        height="154px" alt="hu" />
+      <picture width="auto" height="auto">
+        <source [srcset]="'assets/thumb-kapak-' + 'bae.webp'" type="image/webp">
+        <source [srcset]="'assets/thumb-kapak-' + (news.thumb ? news.thumb : 'bae.jpeg')" type="image/jpeg">
+        <img class="figure-img" [src]="'assets/thumb-kapak-' + (news.thumb ? news.thumb : 'bae.jpeg')" width="250px"
+          height="154px" alt="hu">
+      </picture>
       <!-- <figcaption>Üyelik Çok Avantajlı</figcaption> -->
     </figure>
   </section>
@@ -35,4 +16,4 @@
     <p class="article-prf">Lorem ipsum dolor {{news.topics}},<br> Demanded by {{news.newsOwnerId}}.<br>
     </p>
   </section>
-</a>
+</article>

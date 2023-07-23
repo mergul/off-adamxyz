@@ -187,30 +187,30 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
             'anonymous'
           )
           .then((val) => val);
-        if (this.location.isCurrentPathEqualTo('/user')) {
-          this.scriptService
-            .injectScript(
-              this.renderer,
-              this._document,
-              'https://webrtc.github.io/adapter/adapter-latest.js',
-              'script',
-              '2',
-              '',
-              'anonymous'
-            )
-            .then((val) => val);
-          this.scriptService
-            .injectScript(
-              this.renderer,
-              this._document,
-              'https://cdn.jsdelivr.net/npm/video-stream-merger@3.6.1/dist/video-stream-merger.min.js',
-              'script',
-              '3',
-              '',
-              'anonymous'
-            )
-            .then((val) => val);
-        }
+        // if (this.location.isCurrentPathEqualTo('/user')) {
+        //   this.scriptService
+        //     .injectScript(
+        //       this.renderer,
+        //       this._document,
+        //       'https://webrtc.github.io/adapter/adapter-latest.js',
+        //       'script',
+        //       '2',
+        //       '',
+        //       'anonymous'
+        //     )
+        //     .then((val) => val);
+        //   this.scriptService
+        //     .injectScript(
+        //       this.renderer,
+        //       this._document,
+        //       'https://cdn.jsdelivr.net/npm/video-stream-merger@3.6.1/dist/video-stream-merger.min.js',
+        //       'script',
+        //       '3',
+        //       '',
+        //       'anonymous'
+        //     )
+        //     .then((val) => val);
+        // }
         if (
           !this.service.dbUser &&
           !this.location.path().startsWith('/user') &&

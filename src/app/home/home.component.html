@@ -8,9 +8,9 @@
             <div class="inntext">
                 <div class="mytags" #mytags>
                     <h3>Trend Topics</h3>
-                    <a *ngFor="let tag of newsService.topTags | async"
+                    <article *ngFor="let tag of newsService.topTags | async"
                         (click)="onTagClick(tag.key);$event.stopPropagation();$event.preventDefault()"
-                        style="width: 200px; align-self: start;; cursor: pointer;"> {{tag.key}}</a>
+                        style="cursor: pointer; width: 10ch;"> {{tag.key}}</article>
                 </div>
             </div>
         </div>

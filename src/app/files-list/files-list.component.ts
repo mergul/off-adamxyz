@@ -18,6 +18,7 @@ export class FilesListComponent implements OnInit {
   itemWidth!: number;
   private _thumbName!: string;
   _imgUrl!: SafeUrl;
+  _imgUrlWeb!: SafeUrl;
   private _news!: News;
   width!: number;
   height!: number;
@@ -43,7 +44,7 @@ export class FilesListComponent implements OnInit {
   }
 
   set thumbName(thumbName: string) {
-    const ja = thumbName.lastIndexOf('.');
+    const lastIndex = thumbName.lastIndexOf('.');
     if (!this._imgUrl) {
       if (thumbName.startsWith('medium-')) {
         this.itemWidth = this.winRef.nativeWindow.innerWidth - 40;
@@ -74,6 +75,9 @@ export class FilesListComponent implements OnInit {
         : thumbName;
       this._imgUrl = this.sanitizer.bypassSecurityTrustUrl(
         'assets/' + this._thumbName
+      );
+      this._imgUrlWeb = this.sanitizer.bypassSecurityTrustUrl(
+        'assets/' + this._thumbName.substring(0, lastIndex) + '.webp'
       );
     }
   }

@@ -1,2 +1,6 @@
-<img mat-card-image draggable="false" [src]="_imgUrl" width="auto" height="auto" [style.max-width.px]="width"
-    [style.max-height.px]="height" alt="Asel" />
+<picture width="auto" height="auto" [style.max-width.px]="width" [style.max-height.px]="height">
+    <source [srcset]="_imgUrlWeb" type="image/webp">
+    <source [srcset]="_imgUrl" type="image/jpeg">
+    <img mat-card-image draggable="false" [src]="_imgUrl" width="auto" height="auto" [style.max-width.px]="width"
+        [style.max-height.px]="height" alt="Asel">
+</picture>
