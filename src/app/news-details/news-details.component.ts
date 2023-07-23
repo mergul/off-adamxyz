@@ -398,10 +398,10 @@ export class NewsDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onTagClick(tag: string) {
-    this.service.newsList$ = this.service.newsStreamList$.pipe(
-      map((value) => value.filter((value1) => value1.topics.includes(tag)))
+    let x = this.service.newsStream.value.filter((value1) =>
+      value1.topics.includes(tag)
     );
-
+    this.service.newsStream.next(x);
     this.service.activeLink = tag;
     this.onClose('/home');
   }

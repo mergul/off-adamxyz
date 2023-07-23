@@ -24,6 +24,7 @@ export class NewsService {
   // controller = new AbortController();
   // signal = this.controller.signal;
   newsPayload: any;
+  newsStream!: BehaviorSubject<NewsPayload[]>;
   newsList$!: Observable<NewsPayload[]>;
   newsStreamList$!: Observable<NewsPayload[]>;
   tagsStreamList$!: Observable<NewsPayload[]>;

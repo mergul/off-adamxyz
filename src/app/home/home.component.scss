@@ -114,8 +114,10 @@ h {
     0px 0px 10px 0px rgba(0, 0, 0, 0.14), 0px 0px 14px 0px rgba(0, 0, 0, 0.12);
   article {
     flex: 1;
-    flex-wrap: wrap;
     display: contents;
+  }
+  article:hover {
+    color: #f72fff;
   }
 }
 .mytags:hover {
