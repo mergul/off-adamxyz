@@ -18,16 +18,17 @@ article {
   text-decoration: none;
   display: grid;
   gap: 0.25rem;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(calc(174 * (100vw / 1536)), 1fr)
-  );
+  grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
+  // minmax(calc(174 * (100vw / 1536)), 1fr)
   section.fi {
     margin: auto;
   }
   section.prf {
     grid-column: 2 / span 2;
     font-size: calc(2 * (100vw / 1536)) !important;
+    max-height: calc(180 * (100vw / 1536));
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 .figure {
@@ -38,7 +39,7 @@ article {
   img {
     width: 100%;
     object-fit: cover;
-    height: 132px; //calc(109 * (100vw / 1536));;
+    height: calc(154 * (100vw / 1536)); //132px
   }
   figcaption {
     position: absolute;
@@ -84,11 +85,11 @@ article {
 @media screen and (max-width: 600px) and (min-width: 416px) {
   article {
     grid-template-columns: repeat(auto-fit, minmax(117px, 1fr)) !important;
-    // section.fi {
-    //   figure img {
-    //     height: calc(228 * (100vw / 1536)) !important;
-    //   }
-    // }
+    section.fi {
+      figure img {
+        height: calc(228 * (100vw / 1536)) !important;
+      }
+    }
   }
 }
 @media screen and (max-width: 415px) {

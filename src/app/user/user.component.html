@@ -17,64 +17,40 @@
             <h1>Özgeçmiş</h1>
             <p>Burada dünyaya geldi. Bu dünyada yetişti.</p>
         </article>
-        <div *ngIf="loggedUser">
-            <button #myInput *ngIf="location.isCurrentPathEqualTo('/user/edit')" class="followee"
-                (click)="editProfile()">Edit
-                Profile:
-            </button>
-            <button #myInput *ngIf="!location.isCurrentPathEqualTo('/user/edit')" class="followee"
-                (click)="contents()">İçerikler:
-                <span *ngIf="!location.isCurrentPathEqualTo('/user/edit')"
-                    style="float: right">{{getContentsCount(loggedUser.id)}}</span>
-            </button>
-            <br>
-            <label style="margin: 5px 0;">Görüntüleme: <span style="float: right">{{newsCounts.get('@' +
-                    loggedUser.id)}}</span></label>
-            <br>
-            <button class="followee" (click)="followPeople(false)">Takip Edilen Kişiler
-                <span style="float: right">{{this.userService.newsCo.get(this.userService.links[2])?.length}}</span>
-            </button>
-            <br>
-            <button (click)="followTags()" class="followee">Takip
-                Edilen Etiketler <span
-                    style="float: right">{{this.userService.newsCo.get(this.userService.links[1])?.length}}</span>
-            </button>
-            <br>
-            <button (click)="myOffers()" class="followee">Yapılan Teklifler <span
-                    style="float: right">{{getMeCount(loggedUser.id)
-                    }}</span>
-            </button>
-            <br>
-            <button (click)="mineOffers()" class="followee">Yaptığım Teklifler <span
-                    style="float: right">{{getMyCount(loggedUser.id)
-                    }}</span>
-            </button>
-            <br>
-            <button class="followee" (click)="followPeople(true)">Takipçiler <span
-                    style="float: right">{{loggedUser.followers ? loggedUser.followers.length : 0}}</span>
-            </button>
-            <br>
-            <div *ngIf="location.path().startsWith('/users/')" style="text-align: center; padding-top: 10px">
-                <button class="followee" (click)="tagClick(loggedUser.id)">Takip Et</button>
-            </div>
-            <!-- <div *ngIf="location.path().startsWith('/user/edit')" style="text-align: center; padding-top: 20px">
+        <button #myInput *ngIf="location.isCurrentPathEqualTo('/user/edit')" class="followee"
+            (click)="editProfile()">Edit
+            Profile:
+        </button>
+        <button #myInput *ngIf="!location.isCurrentPathEqualTo('/user/edit')" class="followee"
+            (click)="contents()">İçerikler:
+            <span *ngIf="!location.isCurrentPathEqualTo('/user/edit')"
+                style="float: right">{{getContentsCount()}}</span>
+        </button>
+        <label style="margin: 5px 0;">Görüntüleme: <span style="float: right">{{newsCounts}}</span></label>
+        <button class="followee" (click)="followPeople(false)">Takip Edilen Kişiler
+            <span style="float: right">{{this.userService.newsCo.get(this.userService.links[2])?.length}}</span>
+        </button>
+        <button (click)="followTags()" class="followee">Takip
+            Edilen Etiketler <span
+                style="float: right">{{this.userService.newsCo.get(this.userService.links[1])?.length}}</span>
+        </button>
+        <button (click)="myOffers()" class="followee">Yapılan Teklifler <span style="float: right">{{getMeCount()
+                }}</span>
+        </button>
+        <button (click)="mineOffers()" class="followee">Yaptığım Teklifler <span style="float: right">{{getMyCount()
+                }}</span>
+        </button>
+        <button class="followee" (click)="followPeople(true)">Takipçiler <span style="float: right">{{followers}}</span>
+        </button>
+        <div *ngIf="location.path().startsWith('/users/')" style="text-align: center; padding-top: 10px">
+            <button class="followee" (click)="tagClick()">Takip Et</button>
+        </div>
+        <!-- <div *ngIf="location.path().startsWith('/user/edit')" style="text-align: center; padding-top: 20px">
                 <button class="butto ripple button-outline" (click)="accountHistory()">Hesap Özeti</button>
             </div> -->
-            <div *ngIf="location.path() ==='/user'" style="text-align: center; padding-top: 10px">
-                <button class="butto ripple button-outline" (click)="btnClick()">Edit Profile
-                </button>
-            </div>
-            <!-- <div *ngIf="location.path().startsWith('/user/edit')&&userService.dbUser&&userService.dbUser.roles.includes('ROLE_ADMIN')"
-                style="text-align: center; padding-top: 10px">
-                <button class="butto ripple button-outline" (click)="moneyManage()">Para Aktar</button>
-            </div>
-            <div *ngIf="location.path().startsWith('/user/edit')&&userService.dbUser&&userService.dbUser.roles.includes('ROLE_ADMIN')"
-                style="text-align: center; padding-top: 10px">
-                <button class="butto ripple button-outline" (click)="userMoneyManage()">Para Yönet</button>
-            </div>
-            <div *ngIf="location.path().startsWith('/user/edit')" style="text-align: center; padding-top: 10px">
-                <button class="butto ripple button-outline" (click)="deleteClick()">Hesabımı Sil</button>
-            </div> -->
+        <div *ngIf="location.path() ==='/user'" style="text-align: center; padding-top: 10px">
+            <button class="butto ripple button-outline" (click)="btnClick()">Edit Profile
+            </button>
         </div>
     </section>
     <section class="center">
@@ -83,83 +59,3 @@
         <router-outlet></router-outlet>
     </section>
 </main>
-<!-- <div class="container" style="padding-bottom: 60px">
-    <div class="row">
-        <div style="display: block; width: 100%">
-            <app-profile-header [boolUser]="boolUser"></app-profile-header>
-            <div style="display: flex; margin-top: 0;">
-                <div [style.display]="isMobile ? 'grid' : 'flex'" style="margin: 0 auto; padding: 0px;">
-                    <div *ngIf="loggedUser" [ngStyle]="listStyle"
-                        style="padding: 20px; background-color: #F0F0F0; margin-top: 17px; height: auto; max-width: 390px;">
-                        @{{loggedUser.username}}<br><br>
-                        <div>
-                            <a routerLink="/camera" [state]="{userID: loggedUser.email, loggedID: loggedUser.email}"
-                                style="color: #0013ff;text-decoration: none;background-color: transparent;">
-                                @{{loggedUser.firstname}}'s LIVE ROOM</a>
-                        </div>
-                        <div id="proInput" *ngIf="location.isCurrentPathEqualTo('/user/edit')" contenteditable="true">
-                            {{desc|async}}</div>
-                        <div *ngIf="!location.isCurrentPathEqualTo('/user/edit')">{{desc|async}}</div>
-                        <br><br><br>
-                        <button #myInput *ngIf="location.isCurrentPathEqualTo('/user/edit')" class="followee"
-                            (click)="editProfile()">Edit Profile:
-                        </button>
-                        <button #myInput *ngIf="!location.isCurrentPathEqualTo('/user/edit')" class="followee"
-                            (click)="contents()">İçerikler:
-                        </button>
-                        <span *ngIf="!location.isCurrentPathEqualTo('/user/edit')"
-                            style="float: right">{{loggedUser.contentsCount}}</span><br>
-                        <label style="margin: 5px 0;">Görüntüleme: </label>
-                        <span style="float: right">{{newsCounts.get('@' + loggedUser.id)}}</span><br>
-                        <button class="followee" (click)="proClick(loggedUser.users)">Takip Edilen Kişiler
-                        </button>
-                        <span style="float: right">{{loggedUser.users ? loggedUser.users.length : 0}}</span><br>
-                        <button (click)="followTags()" class="followee">Takip
-                            Edilen Etiketler
-                        </button>
-                        <span style="float: right">{{loggedUser.tags ? loggedUser.tags.length : 0}}</span><br>
-                        <button (click)="myOffers()" class="followee">Yapılan Teklifler
-                        </button>
-                        <span *ngIf="(this.service.meOfferList$|async) as list" style="float: right">{{ list.length
-                            }}</span><br>
-                        <button (click)="mineOffers()" class="followee">Yaptığım Teklifler
-                        </button>
-                        <span *ngIf="(this.service.myOfferList$|async) as list" style="float: right">{{ list.length
-                            }}</span><br>
-                        <button class="followee" (click)="proClick(loggedUser.followers)">Takipçiler
-                        </button>
-                        <span style="float: right">{{loggedUser.followers ? loggedUser.followers.length : 0}}</span><br>
-                        <div *ngIf="location.path().startsWith('/users/')"
-                            style="text-align: center; padding-top: 10px">
-                            <button class="followee" (click)="tagClick(loggedUser.id)">Takip Et</button>
-                        </div>
-                        <div *ngIf="location.path().startsWith('/user/edit')"
-                            style="text-align: center; padding-top: 20px">
-                            <button class="butto ripple button-outline" (click)="accountHistory()">Hesap Özeti</button>
-                        </div>
-                        <div *ngIf="location.path() ==='/user'" style="text-align: center; padding-top: 10px">
-                            <button class="butto ripple button-outline" (click)="btnClick()">Edit Profile
-                            </button>
-                        </div>
-                        <div *ngIf="location.path().startsWith('/user/edit')&&userService.dbUser&&userService.dbUser.roles.includes('ROLE_ADMIN')"
-                            style="text-align: center; padding-top: 10px">
-                            <button class="butto ripple button-outline" (click)="moneyManage()">Para Aktar</button>
-                        </div>
-                        <div *ngIf="location.path().startsWith('/user/edit')&&userService.dbUser&&userService.dbUser.roles.includes('ROLE_ADMIN')"
-                            style="text-align: center; padding-top: 10px">
-                            <button class="butto ripple button-outline" (click)="userMoneyManage()">Para Yönet</button>
-                        </div>
-                        <div *ngIf="location.path().startsWith('/user/edit')"
-                            style="text-align: center; padding-top: 10px">
-                            <button class="butto ripple button-outline" (click)="deleteClick()">Hesabımı Sil</button>
-                        </div>
-                    </div>
-                    <app-profile-center *ngIf="loggedUser" [username]="loggedUser.email" [boolUser]="boolUser"
-                        [user]="userService.dbUser" [userIds]="_userIds" [tagz]="tags" [isPub]="_isPub"
-                        [ngStyle]="compStyle"></app-profile-center>
-                    <router-outlet></router-outlet>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->

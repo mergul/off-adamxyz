@@ -203,8 +203,8 @@ export class NewsDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     const matDialogConfig = new MatDialogConfig();
     matDialogConfig.id = '3';
     matDialogConfig.autoFocus = false;
-    matDialogConfig.width = this.data.header$ + 'px';
-    matDialogConfig.maxWidth = this.data.header$ + 'px';
+    // matDialogConfig.width = this.data.header$ + 'px';
+    // matDialogConfig.maxWidth = this.data.header$ + 'px';
     matDialogConfig.data = {
       ids: this.news$.offers.filter((val) => val !== ''),
       width: this.data.header$,

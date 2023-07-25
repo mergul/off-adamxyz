@@ -144,16 +144,17 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
     this.onDestroy.next();
     this.onDestroy.complete();
   }
-  get newsCounts(): Map<string, string> {
-    return this.service.newsCounts;
-  }
-
-  set newsCounts(newsCounts: Map<string, string>) {
-    this._newsCounts = newsCounts;
+  get newsCounts(): string {
+    const elem = this.userService?._loggedUser?.id;
+    if (elem) return this.service.newsCounts.get('@' + elem) || '0';
+    else return '0';
   }
 
   get loggedUser(): User | undefined {
     return this.userService.dbUser;
+  }
+  get followers() {
+    return this.loggedUser?.followers ? this.loggedUser.followers.length : 0;
   }
 
   get tags(): Observable<Array<string>> {
@@ -163,12 +164,14 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
   set tags(value: Observable<Array<string>>) {
     this._tags = value;
   }
-  tagClick(id: string) {
+  tagClick() {
     this.renderer.removeClass(this.myInput.nativeElement, 'active');
-    this.userService
-      .manageFollowingTag(id, true)
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe();
+    const elem = this.userService?._loggedUser?.id;
+    if (elem)
+      this.userService
+        .manageFollowingTag(elem, true)
+        .pipe(takeUntil(this.onDestroy))
+        .subscribe();
   }
 
   btnClick() {
@@ -243,13 +246,13 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
   mineOffers() {
     this.boolUser = of(8);
   }
-  getContentsCount(userId: string) {
+  getContentsCount() {
     return this.reactiveService.getNewsSubject('me').value.length;
   }
-  getMyCount(userId: string) {
+  getMyCount() {
     return this.reactiveService.getOffersSubject('my').value.length;
   }
-  getMeCount(userId: string) {
+  getMeCount() {
     return this.reactiveService.getOffersSubject('me').value.length;
   }
 }

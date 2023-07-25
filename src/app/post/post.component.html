@@ -1,11 +1,11 @@
-<article (click)="navigate()" [style.width.px]="this._width" [style.height]="!this._isMiddle?this._height+'px':'auto'">
+<article (click)="navigate()">
+  <!-- [style.width.px]="this._width" [style.height]="!this._isMiddle?this._height+'px':'auto'" -->
   <section class="fi">
     <figure class="figure">
-      <picture width="250px" height="154px">
+      <picture>
         <source [srcset]="'assets/thumb-kapak-' + 'bae.webp'" type="image/webp">
         <source [srcset]="'assets/thumb-kapak-' + (news.thumb ? news.thumb : 'bae.jpeg')" type="image/jpeg">
-        <img class="figure-img" [src]="'assets/thumb-kapak-' + (news.thumb ? news.thumb : 'bae.jpeg')" width="250px"
-          height="154px" alt="hu">
+        <img class="figure-img" [src]="'assets/thumb-kapak-' + (news.thumb ? news.thumb : 'bae.jpeg')" alt="hu">
       </picture>
       <!-- <figcaption>Üyelik Çok Avantajlı</figcaption> -->
     </figure>

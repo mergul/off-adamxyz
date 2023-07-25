@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { globals } from '../../environments/environment';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { NewsFeed } from '../core/news.model';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +12,18 @@ export class MultiFilesService {
   private _url: BehaviorSubject<string[]> = new BehaviorSubject(['']);
   private _thumbs: Map<string, Blob> = new Map<string, Blob>();
   private _totalFiles: Array<File> = [];
-  constructor(private http: HttpClient) {}
+  newsFeedStore: BehaviorSubject<NewsFeed | null> =
+    new BehaviorSubject<NewsFeed | null>(null);
+  uploadStore: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  feedState = this.newsFeedStore.asObservable();
+  uploadAction = this.feedState.pipe(
+    switchMap((newsFeed) =>
+      this.httpClient.post<boolean>('/api/rest/news/save', newsFeed, {
+        responseType: 'json',
+      })
+    )
+  );
+  constructor(private httpClient: HttpClient) {}
   get thumbs(): Map<string, Blob> {
     return this._thumbs;
   }
@@ -36,7 +49,7 @@ export class MultiFilesService {
     const options = {
       headers: httpHeaders,
     };
-    return this.http.post(
+    return this.httpClient.post(
       'http://' + globals.url + ':8090/api/image/save',
       total_form
     );

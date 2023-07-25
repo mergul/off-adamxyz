@@ -1,8 +1,8 @@
 <div class="news">
     <ul class="items">
         <li #newsSum *ngFor="let news of newsList$ | async;trackBy: byId" class="news-list shadow">
-            <app-post [news]="news" [myWidth]="this._myWidth" [style.width.px]="this._myWidth"
-                [style.height]="!this._isMiddle?this._height+'px':'auto'"></app-post>
+            <app-post [news]="news"></app-post>
+            <!-- [myWidth]="this._myWidth" [style.width.px]="this._myWidth" [style.height]="!this._isMiddle?this._height+'px':'auto'" -->
         </li>
     </ul>
 </div>

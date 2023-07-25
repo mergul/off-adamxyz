@@ -1,4 +1,4 @@
-<div *ngIf="(boolUser|async) === 0" appScroll (onScroll)="track($event)">
+<div *ngIf="(boolUser|async) === 0" appScroll (onScroll)="track($event)" class="my-news-list">
   <mat-menu #appMenu="matMenu">
     <button mat-menu-item (click)="getNewsByOwner()">En Yeniler</button>
     <button mat-menu-item (click)="getNewsByTopHundred()">En Çok Okunanlar</button>
@@ -9,7 +9,7 @@
     <span style="font-size: large;vertical-align: super;">Sıralama</span>
   </button>
   <app-news-list [newsList]="_newsList" [percentage]="percentage" [activeLink]="service.activeLink"
-    [currLink]="service.activeLink" [iWidth]="this.modalWidth"></app-news-list>
+    [currLink]="service.activeLink"></app-news-list>
   <div (click)="moveTop()" class="scroll-to-top" *ngIf="percentage>50">
   </div>
 </div>
@@ -17,11 +17,11 @@
 <app-profile-list *ngIf="(boolUser|async) === 2" [users]="users" [booled]="(boolUser|async) === 2"></app-profile-list>
 <app-edit-tags-list *ngIf="(boolUser|async) === 3" [tags]="tagz" [booled]="(boolUser|async) === 3"
   [isPub]="isPub"></app-edit-tags-list>
-<app-offer-list *ngIf="(boolUser|async) === 7" [loggedId]="getId()" [urlis]="this.service.meOfferList$"
-  [myWidth]="this.modalWidth"></app-offer-list>
+<app-offer-list *ngIf="(boolUser|async) === 7" [loggedId]="getId()"
+  [urlis]="this.service.meOfferList$"></app-offer-list>
+<!-- [myWidth]="this.modalWidth" -->
 <app-offer-list *ngIf="(boolUser|async) === 8" [loggedId]="getId()"
-  [urlis]="_isPublic?this.service.othersOfferList$:this.service.myOfferList$"
-  [myWidth]="this.modalWidth"></app-offer-list>
+  [urlis]="_isPublic?this.service.othersOfferList$:this.service.myOfferList$"></app-offer-list>
 <app-account-history *ngIf="(boolUser|async) === 4" [booled]="(boolUser|async) === 4"></app-account-history>
 <app-money-manage *ngIf="(boolUser|async) === 5" (boolChange)="receiveMessage($event)"></app-money-manage>
 <app-user-selections *ngIf="(boolUser|async) === 6" [booled]="(boolUser|async) === 6"></app-user-selections>
