@@ -662,7 +662,6 @@ export class ReactiveStreamsService {
     this.unsubscribeResource();
   }
   setOtherListener(id: string) {
-    console.log('setOtherListener id: ', id);
     if (!this.topNewsList.has('top-news-' + id)) {
       this.topNewsList.set('top-news-' + id, ['other']);
       this.newsEventSource.addEventListener(
