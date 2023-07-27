@@ -152,7 +152,7 @@ export class UserService implements OnDestroy {
       this.userTag.email = this.dbUser.email;
       this.userTag.tag = _activeLink;
       if (adding) {
-        this.reactiveService.setUserListListeners(_activeLink);
+        this.reactiveService.setUserListListeners(_activeLink, true);
         return this.http
           .put<boolean>(
             '/api/rest/users/addtag/' + this.reactiveService.random,
