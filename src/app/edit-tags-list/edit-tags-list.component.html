@@ -1,9 +1,0 @@
-<div *ngIf="booled" style="text-align: center; min-height: 50px;">
-  <div *ngFor="let tag of _tags|async; let i = index;"
-    style="text-align: center; display: flex; background: #1a1e1ad0;">
-    <label>#{{tag}}</label>
-    <button *ngIf="!checkUser()" #followButtons (click)="checkTag('#'+tag)?removeTag(tag, i):addTag(tag, i)"
-      type="button" class="butto ripple button-outline">
-      {{checkTag('#'+tag)?'Takibi Kes':'Takip Et'}}</button>
-  </div>
-</div>
