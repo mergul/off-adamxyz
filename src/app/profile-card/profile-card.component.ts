@@ -7,7 +7,6 @@ import {
   Renderer2,
   ViewChild,
   ElementRef,
-  NgZone,
 } from '@angular/core';
 import { User } from '../core/user.model';
 import { UserService } from '../core/user.service';

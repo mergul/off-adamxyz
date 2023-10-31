@@ -11,7 +11,7 @@ export class UserService implements OnDestroy {
   private readonly onDestroy = new Subject<void>();
   public user: FirebaseUserModel | undefined = new FirebaseUserModel();
   _loggedUser!: FirebaseUserModel | undefined;
-  userTag: UserTag = new UserTag();
+  userTag!: UserTag;
   _totalBalance!: number;
   email = '';
   dbUser!: User | undefined;
@@ -148,6 +148,7 @@ export class UserService implements OnDestroy {
   }
   manageFollowingTag(_activeLink: string, adding: boolean) {
     if (this.dbUser) {
+      this.userTag = new UserTag();
       this.userTag.id = this.dbUser.id;
       this.userTag.email = this.dbUser.email;
       this.userTag.tag = _activeLink;

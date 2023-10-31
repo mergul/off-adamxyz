@@ -27,6 +27,7 @@ import {
 } from '@angular/animations';
 import { Router } from '@angular/router';
 import { NewsPayload } from '../core/news.model';
+import { Point } from '../core/Point';
 
 @Component({
   selector: 'app-home',
@@ -105,7 +106,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         });
     }
   }
-  track(event) {
+  track(event: number) {
     // const eleme = document.querySelector('.img-hat') as HTMLElement;
     const mas = Math.round(event);
     this.percentage = mas;

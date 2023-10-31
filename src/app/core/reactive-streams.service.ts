@@ -49,7 +49,7 @@ export class ReactiveStreamsService {
   mainlistenerStartFn = () => {};
   mainTaglistenerFn = () => {};
   mainCountlistenerFn = () => {};
-  meLıstenerStartFn = () => {};
+  meListenerStartFn = () => {};
   myPeoplelistenerFn = () => {};
   myTagslistenerFn = () => {};
   othersStartlistenerFn = () => {};
@@ -446,7 +446,7 @@ export class ReactiveStreamsService {
       }
     }
     this.topNewsList.set('top-news-' + id, ['me']);
-    this.meLıstenerStartFn = this.renderer.listen(
+    this.meListenerStartFn = this.renderer.listen(
       this.newsEventSource,
       'top-news-' + id + '-' + this.random,
       this.meListener
@@ -490,7 +490,7 @@ export class ReactiveStreamsService {
   listenIt = (isMe, isOther, isTags, isPeople, event: any) => {
     if (isMe) {
       this.addToSubjectSingle(this.getNewsSubject('me'), event);
-      this.meLıstenerStartFn();
+      this.meListenerStartFn();
     } else if (isOther) {
       this.addToSubject(this.getNewsSubject('other'), event);
       this.publicStreamList$.set(
@@ -699,10 +699,6 @@ export class ReactiveStreamsService {
         this.othersListener,
         true
       );
-      this.newsEventSource.addEventListener('user-counts-' + id, (event) => {
-        const userCounts = JSON.parse(event.data);
-        this.zone.run(() => this.countsBehaviorSubject.next(userCounts));
-      });
     } else if (this.publicStreamList$.has(id.substring(1))) {
       const myB = this.publicStreamList$.get(id.substring(1));
       if (myB) this.publicBehaviorSubject.next(myB);
@@ -715,6 +711,10 @@ export class ReactiveStreamsService {
           .filter((val) => val.newsOwnerId === id.substring(1))
       );
     }
+    this.newsEventSource.addEventListener('user-counts-' + id, (event) => {
+      const userCounts = JSON.parse(event.data);
+      this.zone.run(() => this.countsBehaviorSubject.next(userCounts));
+    });
     this.newsEventSource.addEventListener(
       'top-offers-' + '@' + id + '-' + this.random,
       this.thyOffListener,
