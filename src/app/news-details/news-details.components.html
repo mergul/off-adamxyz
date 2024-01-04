@@ -7,7 +7,8 @@
     </header>
     <section id="modal-body" [ngStyle]="wideStyle">
         <div id="newsContent">
-            <div id="ContentPlaceHolder1_mansetDiv" class="sliderrr-wrapper" [ngStyle]="sliderWrapperStyle">
+            <app-carousel [myMediaReviews]="news$.mediaReviews"></app-carousel>
+            <!-- <div id="ContentPlaceHolder1_mansetDiv" class="sliderrr-wrapper" [ngStyle]="sliderWrapperStyle">
                 <div class="bx-wrapper">
                     <div #carouselWrapper class="carousel-wrapper" [ngStyle]="carouselWrapperStyle">
                         <ul class="carousel-inner" #carousel [ngStyle]="carouselWrapStyle">
@@ -39,7 +40,7 @@
                             (click)="sliderNext()">Next</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="preknow">
                 <span class='date pre'>{{news$.date | date:'medium'}}</span>
                 <span class="pre bet">|</span>

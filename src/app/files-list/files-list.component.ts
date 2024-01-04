@@ -46,7 +46,7 @@ export class FilesListComponent implements OnInit {
   set thumbName(thumbName: string) {
     const lastIndex = thumbName.lastIndexOf('.');
     if (!this._imgUrl) {
-      if (thumbName.startsWith('medium-')) {
+      if (thumbName.startsWith('medium-') || thumbName.startsWith('http')) {
         this.itemWidth = this.winRef.nativeWindow.innerWidth - 40;
         if (this.itemWidth > 788) {
           this.itemWidth = 788;
@@ -60,7 +60,7 @@ export class FilesListComponent implements OnInit {
         }
         this.width = this.itemWidth;
         this.height = 500 * (this.itemWidth / 788);
-      } else {
+      } else if (thumbName.startsWith('thumb-')) {
         this.itemWidth = this.winRef.nativeWindow.innerWidth - 40;
         if (this.itemWidth > 1040) {
           this.width = 174;
@@ -74,10 +74,14 @@ export class FilesListComponent implements OnInit {
         ? thumbName.slice(1)
         : thumbName;
       this._imgUrl = this.sanitizer.bypassSecurityTrustUrl(
-        'assets/' + this._thumbName
+        !thumbName.startsWith('http')
+          ? 'assets/' + this._thumbName
+          : this._thumbName
       );
       this._imgUrlWeb = this.sanitizer.bypassSecurityTrustUrl(
-        'assets/' + this._thumbName.substring(0, lastIndex) + '.webp'
+        !thumbName.startsWith('http')
+          ? 'assets/' + this._thumbName.substring(0, lastIndex) + '.webp'
+          : this._thumbName
       );
     }
   }

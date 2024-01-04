@@ -173,31 +173,31 @@ export class NewsDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.color
     );
     //    this.renderer.setProperty(this._document.getElementById('mihtml'), 'innerHTML', this.news$.summary);
-    const hammerConfig = new HammerGestureConfig();
-    const hammer = hammerConfig.buildHammer(this.carousel.nativeElement);
-    fromEvent(hammer, 'swipe')
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((res: any) => {
-        res.deltaX > 0 ? this.prev() : this.next();
-      });
-    const mhammer = hammerConfig.buildHammer(this.slider.nativeElement);
-    fromEvent(mhammer, 'swipe')
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((res: any) => {
-        if (res.deltaX > 0) {
-          this.sliderPrev();
-        } else {
-          this.sliderNext();
-        }
-      });
-    setTimeout(() => {
-      if (this.commentsComponent.speechMessages)
-        this.commentsComponent.speechMessages
-          .pipe(filter((res: RecognitionResult) => !!res.transcript?.trim))
-          .subscribe((ko) => {
-            if (ko.transcript) this.commentsComponent.doPatch(ko.transcript);
-          });
-    });
+    // const hammerConfig = new HammerGestureConfig();
+    // const hammer = hammerConfig.buildHammer(this.carousel.nativeElement);
+    // fromEvent(hammer, 'swipe')
+    //   .pipe(takeWhile(() => this.alive))
+    //   .subscribe((res: any) => {
+    //     res.deltaX > 0 ? this.prev() : this.next();
+    //   });
+    // const mhammer = hammerConfig.buildHammer(this.slider.nativeElement);
+    // fromEvent(mhammer, 'swipe')
+    //   .pipe(takeWhile(() => this.alive))
+    //   .subscribe((res: any) => {
+    //     if (res.deltaX > 0) {
+    //       this.sliderPrev();
+    //     } else {
+    //       this.sliderNext();
+    //     }
+    //   });
+    // setTimeout(() => {
+    //   if (this.commentsComponent.speechMessages)
+    //     this.commentsComponent.speechMessages
+    //       .pipe(filter((res: RecognitionResult) => !!res.transcript?.trim))
+    //       .subscribe((ko) => {
+    //         if (ko.transcript) this.commentsComponent.doPatch(ko.transcript);
+    //       });
+    // });
   }
   offersList() {
     const matDialogConfig = new MatDialogConfig();

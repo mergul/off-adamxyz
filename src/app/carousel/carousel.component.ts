@@ -228,4 +228,10 @@ export class CarouselComponent implements OnInit, AfterViewInit {
       review.file_type
     );
   }
+  getImgName(name) {
+    return name.startsWith('bae') ? 'medium-' + name : name;
+  }
+  getThumb(name) {
+    return name.startsWith('bae') ? 'thumb-kapak-' + name : name;
+  }
 }
